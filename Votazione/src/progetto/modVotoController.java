@@ -42,22 +42,22 @@ public class modVotoController {
     }
     @FXML
     void handleOrd(ActionEvent event) throws IOException {
-    	modvoto= lblOrdinale.getText();
+    	modvoto = lblOrdinale.getText();
     }
     
     @FXML
     void handleCat(ActionEvent event) throws IOException {
-    	modvoto= lblCategorico.getText();
+    	modvoto = lblCategorico.getText();
     }
     
     @FXML
     void handleCatConPref(ActionEvent event) throws IOException {
-    	modvoto= lblCategoricoConPref.getText();
+    	modvoto = lblCategoricoConPref.getText();
     }
     
     @FXML
     void handleRef(ActionEvent event) throws IOException {
-    	modvoto= lblReferendum.getText();
+    	modvoto = lblReferendum.getText();
     }
 
     @FXML
@@ -71,9 +71,16 @@ public class modVotoController {
     }
     
     private void pressOk() throws IOException{    	
-    	System.out.print(modvoto);
-    	/*Main m = new Main();
-    	m.changeScene("modCalcVoto");*/
+    	System.out.println(modvoto);
+    	
+    	Main m = new Main();
+    	
+    	if(modvoto.equals("Voto ordinale") || modvoto.equals("Voto categorico") || modvoto.equals("Voto categorico con preferenze")) {
+    		m.changeScene("modCalcVoto.fxml");
+    	}else if(modvoto.equals("Referendum")){
+    		m.changeScene("modCalcRef.fxml");
+    	}
+    
     }
     
 }

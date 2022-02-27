@@ -61,7 +61,10 @@ public class Controller implements UserDao{
     }
     
     private void checkLogin() throws IOException{
-    		
+    	
+    	//Creazione oggetto sessione
+    	Session s = new Session();
+    	
     	Main m = new Main();
     	String username = lblUsername.getText();
     	String pw = lblPassword.getText();

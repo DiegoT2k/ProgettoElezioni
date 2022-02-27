@@ -1,6 +1,5 @@
 package progetto;
 
-
 /**
  * OVERVIEW: Esiste un'istanza unica di questa classe, rappresenta la sessione che a sua volta
  * può essere sia aperta che chiusa, e deve rappresentare tutte le caratteristiche della sessione:
@@ -8,16 +7,45 @@ package progetto;
  */
 public class Session {
 
-	int on = 0; //inizializzazione sessione chiusa
-	String[] modVoto = {"Voto ordinale", "Voto categorico", "Voto categorico con preferenze", "Referendum"};
-	String[] modCalcVoto = {"Maggioranza", "Maggioranza assoluta"};
-	String[] modCalcRef = {"Quorum", "Senza Quorum"};
+	int on; //inizializzazione sessione chiusa
+	String modVoto;
+	String modCalcVoto = "";
+	String modCalcRef = "";
+	
 	//deve indicare la modalità di voto, 0 <= x <= 3
 	int indexModVoto = 0;  
 	int indexModCalcVoto = 0;
-	//costruttore session
+	
+	//costruttore sessione
 	public Session(){
-		
+		this.on = 0;
+		this.modVoto = "";
+		this.modCalcVoto = "";
+		this.modCalcRef = "";
+	}
+	
+	/**
+	 * Getter and Setter
+	 */
+	public void setModVoto(String n) {
+		this.modVoto = n;
+	}
+	public String getModVoto() {
+		return modVoto;
+	}
+	
+	public void setModCalcVoto(String n) {
+		this.modCalcVoto = n;
+	}
+	public String getModCalcVoto() {
+		return modCalcVoto;
+	}
+
+	public void setModCalcRef(String n) {
+		this.modCalcRef = n;
+	}
+	public String getModCalcRef() {
+		return modCalcRef;
 	}
 
 }
