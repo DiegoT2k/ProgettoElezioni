@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="468.0" style="-fx-background-color: #f5cfa2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.AfterLoginControllerAmm">
+   <center>
+      <AnchorPane maxHeight="300.0" prefHeight="32.0" prefWidth="469.0" style="-fx-background-color: #f5cfa2;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnOpen" layoutX="52.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleOpen" prefHeight="30.0" prefWidth="140.0" text="Apri sessione" AnchorPane.leftAnchor="50.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnClose" layoutX="254.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleClose" prefHeight="30.0" prefWidth="140.0" text="Chiudi sessione" AnchorPane.rightAnchor="50.0">
+               <font>
+                  <Font size="17.0" />
+               </font></Button>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" top="20.0" />
+         </BorderPane.margin></AnchorPane>
+   </center>
+   <top>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="101.0" prefWidth="564.0" style="-fx-background-color: #f5cfa2;" text="Pagina Amministratore" textAlignment="CENTER" textFill="#133263" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="70.0" />
+         </BorderPane.margin>
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+   </top>
+   <bottom>
+      <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#handleLogOut" prefHeight="20.0" prefWidth="100.0" text="Log Out" textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="90.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
+</BorderPane>
