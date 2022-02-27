@@ -5,6 +5,7 @@ package progetto;
  * OVERVIEW: Esiste un'istanza unica di questa classe, rappresenta la sessione che a sua volta
  * può essere sia aperta che chiusa, e deve rappresentare tutte le caratteristiche della sessione:
  * come modalità di voto, modalità di calcolo del vincitore
+ * ciao ciao
  */
 public class Session {
 
