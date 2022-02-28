@@ -2,12 +2,20 @@ package progetto;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
-public class AfterLoginControllerAmm {
+public class AfterLoginControllerAmm implements UserDao{
 	
     @FXML
     private ResourceBundle resources;
@@ -25,13 +33,30 @@ public class AfterLoginControllerAmm {
     private Button btnOpen;
 
     @FXML
+    private Label lblError;
+    
+    @FXML
     void handleClose(ActionEvent event) throws IOException {
-    	closeSession();
+    	if(checkSessione()){
+    		closeSession();		
+    	}else if(!checkSessione()) {
+    		//messaggio sessione già aperta
+    		String messaggio = "La sessione è già chiusa";
+    		lblError.setText(messaggio);
+    		lblError.setVisible(true);
+    	}
     }
     
     @FXML
     void handleOpen(ActionEvent event) throws IOException{
-    	openSession();
+    	if(!checkSessione()){
+    	    openSession();	
+    	}else if(checkSessione()) {
+    		//messaggio sessione già aperta
+    		String messaggio = "La sessione è già aperta";
+    		lblError.setText(messaggio);
+    		lblError.setVisible(true);
+    	}
     }
     
     @FXML
@@ -44,12 +69,17 @@ public class AfterLoginControllerAmm {
     	m.changeScene("main.fxml");
     }
 
-    private void closeSession() throws IOException{
-    	
-    	/**
-    	 * Controllo che la sessione sia effettivamente aperta
-    	 */
-    	
+    private void closeSession() throws IOException{ 
+		//setta session.state = 0 = chiusa
+		String sql = "update session set state = 0 where idsession = 1";
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			int r = pr.executeUpdate(sql);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
     	//Apertura pagina conteggio voti
     	Main m = new Main();
     	m.changeScene("conteggio.fxml");
@@ -65,6 +95,38 @@ public class AfterLoginControllerAmm {
     	m.changeScene("modVoto.fxml");
     }
     
+    /**
+     * metodo per verificare lo stato della sessione, connessione al db
+     * Post-condizioni: restituisce false se la sessione è chiusa
+     * 					restituisce true se la sessione è aperta
+     */
+    private boolean checkSessione() {
+    	
+		String sql = "select state from session";
+		int state = 0; 
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			
+			ResultSet rs = pr.executeQuery();
+
+			while(rs.next()) {
+				state = rs.getInt("state");
+			}
+			
+			rs.close();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(state == 0) //sessione chiusa 
+			return false;
+		else 	//state == 1 sessione aperta
+			return true;
+   
+    }
+    
     @FXML
     void initialize() {
         assert btnLogOut != null : "fx:id=\"btnLogout\" was not injected: check your FXML file 'afterLoginAmm.fxml'.";
@@ -72,5 +134,11 @@ public class AfterLoginControllerAmm {
         assert btnClose != null : "fx:id=\"btnLogout\" was not injected: check your FXML file 'afterLoginAmm.fxml'.";
 
     }
+
+	@Override
+	public List<User> getUser() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

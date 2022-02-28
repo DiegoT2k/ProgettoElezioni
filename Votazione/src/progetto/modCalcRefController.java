@@ -2,14 +2,20 @@ package progetto;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
-public class modCalcRefController {
+public class modCalcRefController implements UserDao{
 
 	String calc;
 
@@ -43,12 +49,21 @@ public class modCalcRefController {
 
     @FXML
     void handleOk(ActionEvent event) throws IOException {
-    	System.out.println(calc);
     	pressOk();
 
     }
     
     private void pressOk() throws IOException{
+    	//query per impostare modcalcolo sul db
+		String sql = "update session set modcalcolo = '" + calc + "' where idsession = 1";
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			int r = pr.executeUpdate(sql);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
     	Main m = new Main();
     	m.changeScene("open.fxml");
     }
@@ -61,5 +76,11 @@ public class modCalcRefController {
         assert voto != null : "fx:id=\"voto\" was not injected: check your FXML file 'modCalcRef.fxml'.";
 
     }
+
+	@Override
+	public List<User> getUser() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 }

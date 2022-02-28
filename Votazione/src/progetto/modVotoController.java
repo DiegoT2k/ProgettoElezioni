@@ -2,15 +2,20 @@ package progetto;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
-public class modVotoController {
+public class modVotoController implements UserDao{
 	String modvoto= "";
     @FXML
     private ResourceBundle resources;
@@ -71,8 +76,16 @@ public class modVotoController {
     }
     
     private void pressOk() throws IOException{    	
-    	System.out.println(modvoto);
-    	
+    	//query per impostare modvoto sul db
+		String sql = "update session set modvoto = '" + modvoto + "' where idsession = 1";
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			int r = pr.executeUpdate(sql);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
     	Main m = new Main();
     	
     	if(modvoto.equals("Voto ordinale") || modvoto.equals("Voto categorico") || modvoto.equals("Voto categorico con preferenze")) {
@@ -82,6 +95,12 @@ public class modVotoController {
     	}
     
     }
+    
+	@Override
+	public List<User> getUser() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 }
 

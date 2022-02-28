@@ -28,13 +28,13 @@
                </font></Button>
          </children>
          <BorderPane.margin>
-            <Insets bottom="20.0" top="20.0" />
+            <Insets bottom="20.0" top="60.0" />
          </BorderPane.margin></AnchorPane>
    </center>
    <top>
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="101.0" prefWidth="564.0" style="-fx-background-color: #f5cfa2;" text="Pagina Amministratore" textAlignment="CENTER" textFill="#133263" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets top="70.0" />
+            <Insets top="30.0" />
          </BorderPane.margin>
          <font>
             <Font size="25.0" />
@@ -42,13 +42,20 @@
       </Label>
    </top>
    <bottom>
-      <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#handleLogOut" prefHeight="20.0" prefWidth="100.0" text="Log Out" textAlignment="CENTER" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="16.0" />
-         </font>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets bottom="90.0" />
+            <Insets top="50.0" />
          </BorderPane.margin>
-      </Button>
+         <top>
+            <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#handleLogOut" prefHeight="33.0" prefWidth="73.0" text="LogOut" BorderPane.alignment="CENTER" />
+         </top>
+         <center>
+            <Label fx:id="lblError" visible="false" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
    </bottom>
 </BorderPane>

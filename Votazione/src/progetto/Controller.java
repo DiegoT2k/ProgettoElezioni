@@ -62,9 +62,6 @@ public class Controller implements UserDao{
     
     private void checkLogin() throws IOException{
     	
-    	//Creazione oggetto sessione
-    	Session s = new Session();
-    	
     	Main m = new Main();
     	String username = lblUsername.getText();
     	String pw = lblPassword.getText();
@@ -81,12 +78,11 @@ public class Controller implements UserDao{
         		
         	}else if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("0") && checkVoto(u.username)) { 
         		// elettore deve ancora votare
-        		
+        		//imposto che ha votato
+        		voto(username);
         		m.changeScene("afterLoginElettore.fxml"); //scena elettore
-        		
         	}else if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("0") && !checkVoto(u.username)) {
         		// elettore ha già votato
-        		
         		String messaggio = "L'utente ha già votato";
         		lblMessage.setText(messaggio);
         		lblMessage.setVisible(true);
@@ -101,10 +97,22 @@ public class Controller implements UserDao{
 
     }
 
-    //funzione per verificare se l'utente ha già votato o no
+    //metto che l'utente ha espresso il suo voto perchè ha fatto l'accesso
+    private void voto(String username) throws IOException{
+		String sql = "update userdata set voto = 1 where codfiscale = '" + username + "'";
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			int r = pr.executeUpdate(sql);	
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
+    //funzione per verificare se l'utente ha già votato o no, connessione al db
     public boolean checkVoto(String username) {
 		String sql = "select userdata.voto from userdata where userdata.codfiscale = '" + username + "'";
-		String voto = ""; 
+		int voto = 0; 
 		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
 			PreparedStatement pr = conn.prepareStatement(sql);
 				){
@@ -112,7 +120,7 @@ public class Controller implements UserDao{
 			ResultSet rs = pr.executeQuery();
 
 			while(rs.next()) {
-				voto = rs.getString("voto");
+				voto = rs.getInt("voto");
 			}
 			
 			rs.close();
@@ -121,11 +129,11 @@ public class Controller implements UserDao{
 			e.printStackTrace();
 		}
 		
-		if(voto.equals("1")) 
+		if(voto == 1) { 
 			return false;
-		else 	
+    	}else {
 			return true;
-		
+		}
     }
     
     public String MD5(String md5) {
