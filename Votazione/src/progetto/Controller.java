@@ -70,31 +70,64 @@ public class Controller implements UserDao{
         DaoUsername dao = new DaoUsername();
         List<User> user = dao.getUser();
         
+        
         for(User u: user) {
         	
         	if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("1")) {
         		
         		m.changeScene("afterLoginAmm.fxml"); //scena amministratore
         		
-        	}else if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("0") && checkVoto(u.username)) { 
-        		// elettore deve ancora votare
-        		//imposto che ha votato
-        		voto(username);
-        		m.changeScene("afterLoginElettore.fxml"); //scena elettore
-        	}else if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("0") && !checkVoto(u.username)) {
-        		// elettore ha già votato
-        		String messaggio = "L'utente ha già votato";
-        		lblMessage.setText(messaggio);
-        		lblMessage.setVisible(true);
-        		
-        	}else{
-        		String messaggio = "Username o Password errati!";
+        	}else if(checkSession()) {//controlla che la sessione sia aperta
+
+        		if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("0") && checkVoto(u.username)) { 
+	        		// elettore deve ancora votare
+	        		//imposto che ha votato
+	        		voto(username);
+	        		m.changeScene("afterLoginElettore.fxml"); //scena elettore
+        		}else if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("0") && !checkVoto(u.username)) {
+	        		// elettore ha già votato
+	        		String messaggio = "L'utente ha già votato";
+	        		lblMessage.setText(messaggio);
+	        		lblMessage.setVisible(true);
+	        		break;
+        		}else{
+	        		String messaggio = "Username o Password errati!";
+	        		lblMessage.setText(messaggio);
+	        		lblMessage.setVisible(true);
+        		}
+        	} else {
+        		String messaggio = "La sessione di voto è chiusa";
         		lblMessage.setText(messaggio);
         		lblMessage.setVisible(true);
         	}
-        	
         }
 
+    }
+    //funzione che verifica lo stato della sessione
+    private boolean checkSession() {
+		String sql = "select session.state from session";
+		int sessione = 0; 
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			
+			ResultSet rs = pr.executeQuery();
+
+			while(rs.next()) {
+				sessione = rs.getInt("state");
+			}
+			
+			rs.close();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (sessione == 1) {
+			return true;
+		}else {
+			return false;
+		}
     }
 
     //metto che l'utente ha espresso il suo voto perchè ha fatto l'accesso
@@ -128,7 +161,7 @@ public class Controller implements UserDao{
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		if(voto == 1) { 
 			return false;
     	}else {

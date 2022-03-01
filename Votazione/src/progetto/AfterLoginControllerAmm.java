@@ -75,14 +75,26 @@ public class AfterLoginControllerAmm implements UserDao{
 		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
 			PreparedStatement pr = conn.prepareStatement(sql);
 				){
-			int r = pr.executeUpdate(sql);
+			int rs = pr.executeUpdate(sql);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		resetVoti();
 		
     	//Apertura pagina conteggio voti
     	Main m = new Main();
     	m.changeScene("conteggio.fxml");
+    }
+    
+    private void resetVoti() throws IOException{
+    	String sql = "update userdata set voto = 0";
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			int rs = pr.executeUpdate(sql);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
     }
     
     private void openSession() throws IOException{

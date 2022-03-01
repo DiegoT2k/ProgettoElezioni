@@ -24,6 +24,9 @@ public class ModCalcVotoController implements UserDao{
 
     @FXML
     private URL location;
+    
+    @FXML
+    private Button btnBack;
 
     @FXML
     private Button btnOk;
@@ -36,7 +39,14 @@ public class ModCalcVotoController implements UserDao{
 
     @FXML
     private ToggleGroup voto;
+    
 
+    @FXML
+    void handleBack(ActionEvent event) throws IOException {
+    	Main m = new Main();
+    	m.changeScene("ModVoto.fxml");
+    }
+    
     @FXML
     void handleAss(ActionEvent event) {
     	calc = lblAss.getText();
@@ -63,13 +73,17 @@ public class ModCalcVotoController implements UserDao{
 			e.printStackTrace();
 		}
 		
-    	Main m = new Main();
-    	m.changeScene("open.fxml");
+		if ((calc.equals("Maggioranza"))||(calc.equals("Maggioranza assoluta"))) {
+			Main m = new Main();
+			m.changeScene("open.fxml");
+		}
+    	
     }
     
     @FXML
     void initialize() {
-        assert btnOk != null : "fx:id=\"btnOk\" was not injected: check your FXML file 'modCalcVoto.fxml'.";
+        assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'modCalcVoto.fxml'.";
+    	assert btnOk != null : "fx:id=\"btnOk\" was not injected: check your FXML file 'modCalcVoto.fxml'.";
         assert lblAss != null : "fx:id=\"lblAss\" was not injected: check your FXML file 'modCalcVoto.fxml'.";
         assert lblMagg != null : "fx:id=\"lblMagg\" was not injected: check your FXML file 'modCalcVoto.fxml'.";
         assert voto != null : "fx:id=\"voto\" was not injected: check your FXML file 'modCalcVoto.fxml'.";

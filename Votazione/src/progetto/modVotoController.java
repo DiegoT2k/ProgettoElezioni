@@ -24,6 +24,9 @@ public class modVotoController implements UserDao{
     private URL location;
     
     @FXML
+    private Button btnBack;
+    
+    @FXML
     private Button btnOk;
 
     @FXML
@@ -40,6 +43,12 @@ public class modVotoController implements UserDao{
     
     @FXML
     private ToggleGroup voto;
+    
+    @FXML
+    void handleBack(ActionEvent event) throws IOException {
+    	Main m = new Main();
+    	m.changeScene("AfterLoginAmm.fxml");
+    }
 
     @FXML
     void handleOk(ActionEvent event) throws IOException {
@@ -67,6 +76,7 @@ public class modVotoController implements UserDao{
 
     @FXML
     void initialize() {
+    	 assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'modVoto.fxml'.";
     	 assert btnOk != null : "fx:id=\"btnOk\" was not injected: check your FXML file 'modVoto.fxml'.";
          assert lblCategorico != null : "fx:id=\"lblCategorico\" was not injected: check your FXML file 'modVoto.fxml'.";
          assert lblCategoricoConPref != null : "fx:id=\"lblCategoricoConPref\" was not injected: check your FXML file 'modVoto.fxml'.";

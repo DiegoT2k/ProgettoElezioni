@@ -24,6 +24,9 @@ public class modCalcRefController implements UserDao{
 
     @FXML
     private URL location;
+    
+    @FXML
+    private Button btnBack;
 
     @FXML
     private Button btnOk;
@@ -37,6 +40,12 @@ public class modCalcRefController implements UserDao{
     @FXML
     private ToggleGroup voto;
 
+    @FXML
+    void handleBack(ActionEvent event) throws IOException {
+    	Main m = new Main();
+    	m.changeScene("ModVoto.fxml");
+    }
+    
     @FXML
     void handleNoQ(ActionEvent event) {
     	calc = lblNoQuorum.getText();
@@ -63,13 +72,15 @@ public class modCalcRefController implements UserDao{
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-    	Main m = new Main();
-    	m.changeScene("open.fxml");
+		if ((calc.equals("Quorum"))||(calc.equals("Senza Quorum"))) {
+	    	Main m = new Main();
+	    	m.changeScene("open.fxml");
+		}
     }
     
     @FXML
     void initialize() {
+        assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'modCalcRef.fxml'.";
         assert btnOk != null : "fx:id=\"btnOk\" was not injected: check your FXML file 'modCalcRef.fxml'.";
         assert lblNoQuorum != null : "fx:id=\"lblNoQuorum\" was not injected: check your FXML file 'modCalcRef.fxml'.";
         assert lblQuorum != null : "fx:id=\"lblQuorum\" was not injected: check your FXML file 'modCalcRef.fxml'.";
