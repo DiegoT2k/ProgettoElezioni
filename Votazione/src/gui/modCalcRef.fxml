@@ -4,79 +4,76 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #e8c899;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.modCalcRefController">
-   <top>
-      <Label alignment="CENTER" contentDisplay="CENTER" text="Calcolo vincitore Referendum" textAlignment="CENTER" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets top="30.0" />
-         </BorderPane.margin>
+<AnchorPane prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #e8c899;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.modCalcRefController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="102.0" layoutY="34.0" text="Inserire il quesito del referendum:" textAlignment="CENTER">
          <font>
-            <Font size="23.0" />
+            <Font size="20.0" />
          </font>
       </Label>
-   </top>
-   <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <GridPane layoutY="171.0" prefHeight="115.0" prefWidth="500.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <GridPane prefHeight="237.0" prefWidth="500.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <RadioButton fx:id="lblQuorum" mnemonicParsing="false" onAction="#handleQuorum" text="Quorum">
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="voto" />
-                     </toggleGroup>
-                     <GridPane.margin>
-                        <Insets left="75.0" />
-                     </GridPane.margin>
-                  </RadioButton>
-                  <RadioButton fx:id="lblNoQuorum" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#handleNoQ" text="Senza Quorum" toggleGroup="$voto" GridPane.columnIndex="1">
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <GridPane.margin>
-                        <Insets left="50.0" />
-                     </GridPane.margin>
-                  </RadioButton>
-                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#handleBack" prefHeight="18.0" text="Indietro" GridPane.rowIndex="1">
-                     <padding>
-                        <Insets bottom="6.0" left="15.0" right="15.0" top="6.0" />
-                     </padding>
-                     <GridPane.margin>
-                        <Insets left="85.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <Button fx:id="btnOk" mnemonicParsing="false" onAction="#handleOk" prefHeight="18.0" prefWidth="68.0" text="Ok" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <padding>
-                        <Insets bottom="6.0" left="15.0" right="15.0" top="6.0" />
-                     </padding>
-                     <GridPane.margin>
-                        <Insets left="85.0" />
-                     </GridPane.margin>
-                  </Button>
-               </children>
-            </GridPane>
+            <RadioButton fx:id="lblQuorum" mnemonicParsing="false" onAction="#handleQuorum" text="Quorum">
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+               <toggleGroup>
+                  <ToggleGroup fx:id="voto" />
+               </toggleGroup>
+               <GridPane.margin>
+                  <Insets left="75.0" />
+               </GridPane.margin>
+            </RadioButton>
+            <RadioButton fx:id="lblNoQuorum" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#handleNoQ" text="Senza Quorum" toggleGroup="$voto" GridPane.columnIndex="1">
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin>
+            </RadioButton>
+            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#handleBack" prefHeight="18.0" text="Indietro" GridPane.rowIndex="1">
+               <padding>
+                  <Insets bottom="6.0" left="15.0" right="15.0" top="6.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="85.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="btnOk" mnemonicParsing="false" onAction="#handleOk" prefHeight="18.0" prefWidth="68.0" text="Ok" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <padding>
+                  <Insets bottom="6.0" left="15.0" right="15.0" top="6.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="85.0" />
+               </GridPane.margin>
+            </Button>
          </children>
-      </AnchorPane>
-   </center>
-</BorderPane>
+      </GridPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="135.0" text="Scegliere la modalità di calcolo del vincitore:" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fldQues" layoutX="76.0" layoutY="86.0" prefHeight="25.0" prefWidth="350.0" promptText="Quesito..." />
+   </children>
+</AnchorPane>

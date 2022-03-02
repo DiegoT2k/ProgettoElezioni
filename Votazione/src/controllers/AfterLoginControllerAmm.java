@@ -80,10 +80,22 @@ public class AfterLoginControllerAmm implements UserDao{
 			e.printStackTrace();
 		}
 		resetVoti();
+		resetQues();
 		
     	//Apertura pagina conteggio voti
     	Main m = new Main();
     	m.changeScene("../gui/conteggio.fxml");
+    }
+    
+    private void resetQues() throws IOException{
+    	String sql = "update session set domandaReferendum = NULL";
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			int rs = pr.executeUpdate(sql);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
     }
     
     private void resetVoti() throws IOException{

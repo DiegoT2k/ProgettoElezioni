@@ -13,11 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 public class modCalcRefController implements UserDao{
 
 	String calc;
+	String ques=null;
 
     @FXML
     private ResourceBundle resources;
@@ -30,6 +32,9 @@ public class modCalcRefController implements UserDao{
 
     @FXML
     private Button btnOk;
+    
+    @FXML
+    private TextField fldQues;
 
     @FXML
     private RadioButton lblNoQuorum;
@@ -72,9 +77,23 @@ public class modCalcRefController implements UserDao{
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		if ((calc.equals("Quorum"))||(calc.equals("Senza Quorum"))) {
+		updateQues();
+		if (((calc.equals("Quorum"))||(calc.equals("Senza Quorum")))&&(!ques.equals(""))) {
 	    	Main m = new Main();
 	    	m.changeScene("../gui/open.fxml");
+		}
+    }
+    
+    //funzione che inserisce il quesito del referendum nel db
+    private void updateQues() throws IOException{
+    	ques=fldQues.getText();
+    	String sql = "update session set domandaReferendum = '" + ques + "'";
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			int r = pr.executeUpdate(sql);
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
     }
     
@@ -85,6 +104,7 @@ public class modCalcRefController implements UserDao{
         assert lblNoQuorum != null : "fx:id=\"lblNoQuorum\" was not injected: check your FXML file 'modCalcRef.fxml'.";
         assert lblQuorum != null : "fx:id=\"lblQuorum\" was not injected: check your FXML file 'modCalcRef.fxml'.";
         assert voto != null : "fx:id=\"voto\" was not injected: check your FXML file 'modCalcRef.fxml'.";
+        assert fldQues != null : "fx:id=\"fldQues\" was not injected: check your FXML file 'modCalcRef.fxml'.";
 
     }
 
