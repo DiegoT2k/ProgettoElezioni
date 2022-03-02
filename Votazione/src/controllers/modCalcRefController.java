@@ -19,7 +19,8 @@ import javafx.scene.control.ToggleGroup;
 
 public class modCalcRefController implements UserDao{
 
-	String calc;
+	String calc = "";
+	
 	String ques=null;
 
     @FXML
@@ -90,8 +91,9 @@ public class modCalcRefController implements UserDao{
 			lblError.setVisible(false);
 		}
 		
-		if (((calc.equals("Quorum"))||(calc.equals("Senza Quorum")))&&(!ques.equals(""))) {
-	    	Main m = new Main();
+    	Main m = new Main();
+		
+    	if (((calc.equals("Quorum"))||(calc.equals("Senza Quorum")))&&(!ques.equals(""))) {
 	    	m.changeScene("../gui/open.fxml");
 		}
     }

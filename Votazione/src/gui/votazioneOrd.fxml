@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #e6c373;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.VotazioneOrdController">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #f5cfa2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.VotazioneOrdController">
    <children>
       <VBox layoutX="23.0" layoutY="82.0" prefHeight="237.0" prefWidth="330.0" AnchorPane.leftAnchor="20.0">
          <children>
