@@ -12,6 +12,7 @@ import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -41,6 +42,9 @@ public class modCalcRefController implements UserDao{
 
     @FXML
     private RadioButton lblQuorum;
+    
+    @FXML
+    private Label lblError;
 
     @FXML
     private ToggleGroup voto;
@@ -78,6 +82,14 @@ public class modCalcRefController implements UserDao{
 			e.printStackTrace();
 		}
 		updateQues();
+		
+		if(ques.equals("")) {
+			lblError.setVisible(true);
+		}
+		if(!ques.equals("")) {
+			lblError.setVisible(false);
+		}
+		
 		if (((calc.equals("Quorum"))||(calc.equals("Senza Quorum")))&&(!ques.equals(""))) {
 	    	Main m = new Main();
 	    	m.changeScene("../gui/open.fxml");
