@@ -64,7 +64,7 @@ public class AfterLoginControllerElettore implements UserDao{
 		}else if(mod.equals("Voto categorico con preferenza")) {
 			//m.changeScene("");
 		}else if(mod.equals("Referendum")) {
-			//m.changeScene("");	
+			m.changeScene("../gui/votazioneRef.fxml");	
 		}
     	 
     }

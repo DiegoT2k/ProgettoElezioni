@@ -38,6 +38,18 @@ public class VotazioneOrdController implements UserDao{
     private Label lblCand4;
     
     @FXML
+    private Label lblCand5;
+
+    @FXML
+    private Label lblCand6;
+
+    @FXML
+    private Label lblCand7;
+
+    @FXML
+    private Label lblCand8;
+    
+    @FXML
     private Spinner<Integer> spn1;
     
     @FXML
@@ -49,8 +61,18 @@ public class VotazioneOrdController implements UserDao{
     @FXML
     private Spinner<Integer> spn4;
     
-    SpinnerValueFactory<Integer> svf = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, 1);
-    
+    @FXML
+    private Spinner<Integer> spn5;
+
+    @FXML
+    private Spinner<Integer> spn6;
+
+    @FXML
+    private Spinner<Integer> spn7;
+
+    @FXML
+    private Spinner<Integer> spn8;
+      
     @FXML
     private Button btnInvio;
 
@@ -72,15 +94,24 @@ public class VotazioneOrdController implements UserDao{
     }
     
     private void initSpinner() throws IOException{
-    	SpinnerValueFactory<Integer> svf1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 4, 0);
-    	SpinnerValueFactory<Integer> svf2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 4, 0);
-    	SpinnerValueFactory<Integer> svf3 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 4, 0);
-    	SpinnerValueFactory<Integer> svf4 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 4, 0);
+    	SpinnerValueFactory<Integer> svf1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 8, 0);
+    	SpinnerValueFactory<Integer> svf2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 8, 0);
+    	SpinnerValueFactory<Integer> svf3 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 8, 0);
+    	SpinnerValueFactory<Integer> svf4 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 8, 0);
+    	SpinnerValueFactory<Integer> svf5 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 8, 0);
+    	SpinnerValueFactory<Integer> svf6 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 8, 0);
+    	SpinnerValueFactory<Integer> svf7 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 8, 0);
+    	SpinnerValueFactory<Integer> svf8 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 8, 0);
 
     	spn1.setValueFactory(svf1);
         spn2.setValueFactory(svf2);
         spn3.setValueFactory(svf3);
         spn4.setValueFactory(svf4);
+        spn5.setValueFactory(svf5);
+        spn6.setValueFactory(svf6);
+        spn7.setValueFactory(svf7);
+        spn8.setValueFactory(svf8);
+        
     }
     
     private void riempiCampi() throws IOException{
@@ -98,8 +129,8 @@ public class VotazioneOrdController implements UserDao{
     					i++;
     					cognome = rs.getString("cognome");
     					if(i == 1) {
-	    					lblCand1.setText(cognome);
-	    					lblCand1.setVisible(true);    						
+    						lblCand1.setText(cognome);
+    						lblCand1.setVisible(true);    						
     					}else if(i == 2) {
 	    					lblCand2.setText(cognome);
 	    					lblCand2.setVisible(true);   						
@@ -109,6 +140,18 @@ public class VotazioneOrdController implements UserDao{
     					}else if(i == 4) {
 	    					lblCand4.setText(cognome);
 	    					lblCand4.setVisible(true); 			
+    					}else if(i == 5) {
+	    					lblCand5.setText(cognome);
+	    					lblCand5.setVisible(true); 			
+    					}else if(i == 6) {
+	    					lblCand6.setText(cognome);
+	    					lblCand6.setVisible(true); 			
+    					}else if(i == 7) {
+	    					lblCand7.setText(cognome);
+	    					lblCand7.setVisible(true); 			
+    					}else if(i == 8) {
+	    					lblCand8.setText(cognome);
+	    					lblCand8.setVisible(true); 			
     					}
 
     				}
