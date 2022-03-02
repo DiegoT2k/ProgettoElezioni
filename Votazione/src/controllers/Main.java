@@ -21,7 +21,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("../gui/main.fxml"));
                 
         primaryStage.setTitle("Sistema elettorale");
-        primaryStage.setScene(new Scene(root, 500, 300));
+        primaryStage.setScene(new Scene(root, 700, 400));
         primaryStage.show();
         
     }
