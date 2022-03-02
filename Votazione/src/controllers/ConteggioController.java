@@ -1,4 +1,4 @@
-package progetto;
+package controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,7 +36,7 @@ public class ConteggioController {
     
     private void pressOk() throws IOException {
     	Main m = new Main();
-    	m.changeScene("afterLoginAmm.fxml");
+    	m.changeScene("../gui/afterLoginAmm.fxml");
     }
 	
 }

@@ -1,4 +1,4 @@
-package progetto;
+package controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -58,9 +58,9 @@ public class AfterLoginControllerElettore implements UserDao{
 			}
 		
 		if(mod.equals("Voto ordinale")) {
-			m.changeScene("votazioneOrd.fxml");
+			m.changeScene("../gui/votazioneOrd.fxml");
 		}else if(mod.equals("Voto categorico")) {
-			m.changeScene("votazioneCat.fxml");
+			m.changeScene("../gui/votazioneCat.fxml");
 		}else if(mod.equals("Voto categorico con preferenza")) {
 			//m.changeScene("");
 		}else if(mod.equals("Referendum")) {
@@ -78,7 +78,7 @@ public class AfterLoginControllerElettore implements UserDao{
 
     private void checkLogOut() throws IOException{
     	Main m = new Main();
-    	m.changeScene("main.fxml");
+    	m.changeScene("../gui/main.fxml");
     }
     
     

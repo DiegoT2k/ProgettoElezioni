@@ -1,4 +1,4 @@
-package progetto;
+package controllers;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ public class Main extends Application {
     	stg = primaryStage;
     	primaryStage.setResizable(false);
     	
-        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../gui/main.fxml"));
                 
         primaryStage.setTitle("Sistema elettorale");
         primaryStage.setScene(new Scene(root, 500, 300));

@@ -1,7 +1,8 @@
 package dao;
 
 import java.util.List;
-import progetto.User;
+
+import controllers.User;
 
 public interface UserDao {
 	

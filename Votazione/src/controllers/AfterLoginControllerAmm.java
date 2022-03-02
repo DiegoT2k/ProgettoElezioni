@@ -1,4 +1,4 @@
-package progetto;
+package controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -66,7 +66,7 @@ public class AfterLoginControllerAmm implements UserDao{
 
     private void checkLogOut() throws IOException{
     	Main m = new Main();
-    	m.changeScene("main.fxml");
+    	m.changeScene("../gui/main.fxml");
     }
 
     private void closeSession() throws IOException{ 
@@ -104,7 +104,7 @@ public class AfterLoginControllerAmm implements UserDao{
     	
     	//Apertura sessione
     	Main m = new Main();
-    	m.changeScene("modVoto.fxml");
+    	m.changeScene("../gui/modVoto.fxml");
     }
     
     /**

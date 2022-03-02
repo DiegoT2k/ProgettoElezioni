@@ -1,4 +1,4 @@
-package progetto;
+package controllers;
 
 public class User {
 	String username;

@@ -1,4 +1,4 @@
-package progetto;
+package controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -61,14 +61,13 @@ public class VotazioneOrdController implements UserDao{
     
     private void pressInvio() throws IOException{
     	Main m = new Main();
-    	m.changeScene("invioVoto.fxml");
+    	m.changeScene("../gui/invioVoto.fxml");
     }
     
     @FXML
     void initialize() throws IOException{
     	riempiCampi();
     	initSpinner();
-        
 
     }
     

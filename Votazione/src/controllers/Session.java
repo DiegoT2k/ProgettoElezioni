@@ -1,4 +1,4 @@
-package progetto;
+package controllers;
 
 /**
  * OVERVIEW: Esiste un'istanza unica di questa classe, rappresenta la sessione che a sua volta

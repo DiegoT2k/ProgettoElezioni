@@ -1,4 +1,4 @@
-package progetto;
+package controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -75,7 +75,7 @@ public class Controller implements UserDao{
         	
         	if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("1")) {
         		
-        		m.changeScene("afterLoginAmm.fxml"); //scena amministratore
+        		m.changeScene("../gui/afterLoginAmm.fxml"); //scena amministratore
         		
         	}else if(checkSession()) {//controlla che la sessione sia aperta
 
@@ -83,7 +83,7 @@ public class Controller implements UserDao{
 	        		// elettore deve ancora votare
 	        		//imposto che ha votato
 	        		voto(username);
-	        		m.changeScene("afterLoginElettore.fxml"); //scena elettore
+	        		m.changeScene("../gui/afterLoginElettore.fxml"); //scena elettore
         		}else if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("0") && !checkVoto(u.username)) {
 	        		// elettore ha già votato
 	        		String messaggio = "L'utente ha già votato";

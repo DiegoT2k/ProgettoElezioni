@@ -1,4 +1,4 @@
-package progetto;
+package controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,10 +15,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
-public class modCalcRefController implements UserDao{
+public class ModCalcVotoController implements UserDao{
 
 	String calc;
-
+	
     @FXML
     private ResourceBundle resources;
 
@@ -32,36 +32,36 @@ public class modCalcRefController implements UserDao{
     private Button btnOk;
 
     @FXML
-    private RadioButton lblNoQuorum;
+    private RadioButton lblAss;
 
     @FXML
-    private RadioButton lblQuorum;
+    private RadioButton lblMagg;
 
     @FXML
     private ToggleGroup voto;
+    
 
     @FXML
     void handleBack(ActionEvent event) throws IOException {
     	Main m = new Main();
-    	m.changeScene("ModVoto.fxml");
+    	m.changeScene("../gui/ModVoto.fxml");
     }
     
     @FXML
-    void handleNoQ(ActionEvent event) {
-    	calc = lblNoQuorum.getText();
+    void handleAss(ActionEvent event) {
+    	calc = lblAss.getText();
     }
 
     @FXML
-    void handleQuorum(ActionEvent event) {
-    	calc = lblQuorum.getText();
+    void handleMagg(ActionEvent event) {
+    	calc = lblMagg.getText();
     }
 
     @FXML
     void handleOk(ActionEvent event) throws IOException {
     	pressOk();
-
     }
-    
+
     private void pressOk() throws IOException{
     	//query per impostare modcalcolo sul db
 		String sql = "update session set modcalcolo = '" + calc + "' where idsession = 1";
@@ -72,19 +72,21 @@ public class modCalcRefController implements UserDao{
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		if ((calc.equals("Quorum"))||(calc.equals("Senza Quorum"))) {
-	    	Main m = new Main();
-	    	m.changeScene("open.fxml");
+		
+		if ((calc.equals("Maggioranza"))||(calc.equals("Maggioranza assoluta"))) {
+			Main m = new Main();
+			m.changeScene("../gui/open.fxml");
 		}
+    	
     }
     
     @FXML
     void initialize() {
-        assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'modCalcRef.fxml'.";
-        assert btnOk != null : "fx:id=\"btnOk\" was not injected: check your FXML file 'modCalcRef.fxml'.";
-        assert lblNoQuorum != null : "fx:id=\"lblNoQuorum\" was not injected: check your FXML file 'modCalcRef.fxml'.";
-        assert lblQuorum != null : "fx:id=\"lblQuorum\" was not injected: check your FXML file 'modCalcRef.fxml'.";
-        assert voto != null : "fx:id=\"voto\" was not injected: check your FXML file 'modCalcRef.fxml'.";
+        assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'modCalcVoto.fxml'.";
+    	assert btnOk != null : "fx:id=\"btnOk\" was not injected: check your FXML file 'modCalcVoto.fxml'.";
+        assert lblAss != null : "fx:id=\"lblAss\" was not injected: check your FXML file 'modCalcVoto.fxml'.";
+        assert lblMagg != null : "fx:id=\"lblMagg\" was not injected: check your FXML file 'modCalcVoto.fxml'.";
+        assert voto != null : "fx:id=\"voto\" was not injected: check your FXML file 'modCalcVoto.fxml'.";
 
     }
 
@@ -93,5 +95,6 @@ public class modCalcRefController implements UserDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
-    
+
+
 }

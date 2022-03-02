@@ -1,4 +1,4 @@
-package progetto;
+package controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,7 +37,7 @@ public class openController implements UserDao{
 		}
 		
     	Main m = new Main();
-    	m.changeScene("afterLoginAmm.fxml");
+    	m.changeScene("../gui/afterLoginAmm.fxml");
     }
 
     @FXML

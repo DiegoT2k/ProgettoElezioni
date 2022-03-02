@@ -1,4 +1,4 @@
-package progetto;
+package controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,7 +25,7 @@ public class InvioVotoController {
 
     private void pressLogout() throws IOException{
     	Main m = new Main();
-    	m.changeScene("main.fxml");
+    	m.changeScene("../gui/main.fxml");
     }
     
     

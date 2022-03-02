@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #e8c899;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.modVotoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #e8c899;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModCalcVotoController">
    <top>
-      <Label alignment="CENTER" contentDisplay="CENTER" text="Impostazioni sessione di voto" textAlignment="CENTER" BorderPane.alignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="CENTER" text="Calcolo vincitore votazione" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets top="30.0" />
          </BorderPane.margin>
@@ -23,54 +23,41 @@
    <center>
       <FlowPane layoutY="5.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <RadioButton fx:id="lblOrdinale" mnemonicParsing="false" onAction="#handleOrd" text="Voto ordinale">
+            <RadioButton fx:id="lblMagg" mnemonicParsing="false" onAction="#handleMagg" text="Maggioranza">
                <padding>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </padding>
                <FlowPane.margin>
-                  <Insets top="60.0" />
+                  <Insets left="75.0" top="60.0" />
                </FlowPane.margin>
                <toggleGroup>
                   <ToggleGroup fx:id="voto" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="lblCategorico" mnemonicParsing="false" onAction="#handleCat" text="Voto categorico" toggleGroup="$voto">
+            <RadioButton fx:id="lblAss" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#handleAss" text="Maggioranza assoluta" toggleGroup="$voto">
                <FlowPane.margin>
-                  <Insets top="60.0" />
+                  <Insets left="60.0" top="60.0" />
                </FlowPane.margin>
                <padding>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </padding>
-            </RadioButton>
-            <RadioButton fx:id="lblCategoricoConPref" mnemonicParsing="false" onAction="#handleCatConPref" prefHeight="47.0" prefWidth="220.0" text="Voto categorico con preferenze" toggleGroup="$voto">
-               <padding>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </padding>
-               <FlowPane.margin>
-                  <Insets top="60.0" />
-               </FlowPane.margin>
-            </RadioButton>
-            <RadioButton fx:id="lblReferendum" mnemonicParsing="false" onAction="#handleRef" text="Referendum" toggleGroup="$voto">
-               <padding>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </padding>
-               <FlowPane.margin>
-                  <Insets left="200.0" top="10.0" />
-               </FlowPane.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </RadioButton>
          </children>
       </FlowPane>
    </center>
    <bottom>
-      <FlowPane prefHeight="68.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+      <FlowPane prefHeight="99.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btnBack" mnemonicParsing="false" onAction="#handleBack" prefHeight="18.0" text="Indietro">
-               <padding>
-                  <Insets bottom="6.0" left="15.0" right="15.0" top="6.0" />
-               </padding>
                <FlowPane.margin>
                   <Insets left="35.0" />
                </FlowPane.margin>
+               <padding>
+                  <Insets bottom="6.0" left="15.0" right="15.0" top="6.0" />
+               </padding>
             </Button>
             <Button fx:id="btnOk" mnemonicParsing="false" onAction="#handleOk" prefHeight="18.0" prefWidth="68.0" text="Ok">
                <padding>

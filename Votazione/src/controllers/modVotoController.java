@@ -1,4 +1,4 @@
-package progetto;
+package controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -47,7 +47,7 @@ public class modVotoController implements UserDao{
     @FXML
     void handleBack(ActionEvent event) throws IOException {
     	Main m = new Main();
-    	m.changeScene("AfterLoginAmm.fxml");
+    	m.changeScene("../gui/AfterLoginAmm.fxml");
     }
 
     @FXML
@@ -99,9 +99,9 @@ public class modVotoController implements UserDao{
     	Main m = new Main();
     	
     	if(modvoto.equals("Voto ordinale") || modvoto.equals("Voto categorico") || modvoto.equals("Voto categorico con preferenze")) {
-    		m.changeScene("modCalcVoto.fxml");
+    		m.changeScene("../gui/modCalcVoto.fxml");
     	}else if(modvoto.equals("Referendum")){
-    		m.changeScene("modCalcRef.fxml");
+    		m.changeScene("../gui/modCalcRef.fxml");
     	}
     
     }
