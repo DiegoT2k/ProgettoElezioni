@@ -83,7 +83,7 @@ public class AfterLoginControllerAmm implements UserDao{
 		
     	//Apertura pagina conteggio voti
     	Main m = new Main();
-    	m.changeScene("conteggio.fxml");
+    	m.changeScene("../gui/conteggio.fxml");
     }
     
     private void resetVoti() throws IOException{
