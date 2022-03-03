@@ -7,31 +7,41 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
 public class ConteggioController {
-
+	
+	String vinc;
     @FXML
     private ResourceBundle resources;
 
     @FXML
-    private URL location;
-    
-    @FXML
-    private Button btnOk;
-    
-    @FXML
-    private BorderPane handelOk;
+    private Button btnAvanti;
 
     @FXML
-    void handleOk(ActionEvent event) throws IOException {
-    	pressOk();
+    private Label lblErr;
+
+    @FXML
+    private Label lblVinc;
+    
+    @FXML
+    void initialize() throws IOException {
+    	calcoloVinc();
+        displayVinc();
+    }
+    //funzione che calcola il vincitore se è presente
+    private void calcoloVinc() {
+    	
+	}
+    //funzione che mette a display il nome del vincitore o un messaggio di errore
+	private void displayVinc() throws IOException {
+    	
     }
 
     @FXML
-    void initialize() {
-    	 assert btnOk != null : "fx:id=\"btnOk\" was not injected: check your FXML file 'conteggio.fxml'.";
-         assert handelOk != null : "fx:id=\"handelOk\" was not injected: check your FXML file 'conteggio.fxml'.";
+    void handleAvanti(ActionEvent event) throws IOException {
+    	pressOk();
     }
     
     private void pressOk() throws IOException {
