@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #f5cfa2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.VotazioneCatConPrefController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #f5cfa2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.VotazioneCatConPrefController">
    <children>
       <GridPane layoutX="29.0" layoutY="57.0" prefHeight="332.0" prefWidth="654.0">
          <columnConstraints>
@@ -40,12 +40,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <RadioButton fx:id="lblPart1" mnemonicParsing="false" GridPane.rowIndex="1">
+                  <RadioButton fx:id="lblPart1" mnemonicParsing="false" onAction="#handleP1" GridPane.rowIndex="1">
                      <toggleGroup>
                         <ToggleGroup fx:id="votopartito" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="lblCand1" mnemonicParsing="false" GridPane.columnIndex="1">
+                  <RadioButton fx:id="lblCand1" mnemonicParsing="false" onAction="#handleC1" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
@@ -53,7 +53,7 @@
                         <ToggleGroup fx:id="votocandidato" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="lblCand2" mnemonicParsing="false" toggleGroup="$votocandidato" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <RadioButton fx:id="lblCand2" mnemonicParsing="false" onAction="#handleC2" toggleGroup="$votocandidato" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="15.0" />
                      </GridPane.margin>
@@ -71,13 +71,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <RadioButton fx:id="lblPart2" mnemonicParsing="false" toggleGroup="$votopartito" GridPane.rowIndex="1" />
-                  <RadioButton fx:id="lblCand3" mnemonicParsing="false" toggleGroup="$votocandidato" GridPane.columnIndex="1">
+                  <RadioButton fx:id="lblPart2" mnemonicParsing="false" onAction="#handleP2" toggleGroup="$votopartito" GridPane.rowIndex="1" />
+                  <RadioButton fx:id="lblCand3" mnemonicParsing="false" onAction="#handleC3" toggleGroup="$votocandidato" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
                   </RadioButton>
-                  <RadioButton fx:id="lblCand4" mnemonicParsing="false" toggleGroup="$votocandidato" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <RadioButton fx:id="lblCand4" mnemonicParsing="false" onAction="#handleC4" toggleGroup="$votocandidato" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="15.0" />
                      </GridPane.margin>
@@ -95,13 +95,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <RadioButton fx:id="lblPart3" mnemonicParsing="false" toggleGroup="$votopartito" GridPane.rowIndex="1" />
-                  <RadioButton fx:id="lblCand5" mnemonicParsing="false" toggleGroup="$votocandidato" GridPane.columnIndex="1">
+                  <RadioButton fx:id="lblPart3" mnemonicParsing="false" onAction="#handleP3" toggleGroup="$votopartito" GridPane.rowIndex="1" />
+                  <RadioButton fx:id="lblCand5" mnemonicParsing="false" onAction="#handleC5" toggleGroup="$votocandidato" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
                   </RadioButton>
-                  <RadioButton fx:id="lblCand6" mnemonicParsing="false" toggleGroup="$votocandidato" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <RadioButton fx:id="lblCand6" mnemonicParsing="false" onAction="#handleC6" toggleGroup="$votocandidato" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="15.0" />
                      </GridPane.margin>
@@ -119,13 +119,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <RadioButton fx:id="lblPart4" mnemonicParsing="false" toggleGroup="$votopartito" GridPane.rowIndex="1" />
-                  <RadioButton fx:id="lblCand7" mnemonicParsing="false" toggleGroup="$votocandidato" GridPane.columnIndex="1">
+                  <RadioButton fx:id="lblPart4" mnemonicParsing="false" onAction="#handleP4" toggleGroup="$votopartito" GridPane.rowIndex="1" />
+                  <RadioButton fx:id="lblCand7" mnemonicParsing="false" onAction="#handleC7" toggleGroup="$votocandidato" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
                   </RadioButton>
-                  <RadioButton fx:id="lblCand8" mnemonicParsing="false" toggleGroup="$votocandidato" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <RadioButton fx:id="lblCand8" mnemonicParsing="false" onAction="#handleC8" toggleGroup="$votocandidato" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="15.0" />
                      </GridPane.margin>

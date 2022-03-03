@@ -18,6 +18,9 @@ import javafx.scene.control.ToggleGroup;
 
 public class VotazioneCatConPrefController implements UserDao{
 	
+	int sceltaCand = 0;
+	int sceltaPart = 0;
+	
 	String votoPart="",votoCand;
 	
     @FXML
@@ -66,6 +69,66 @@ public class VotazioneCatConPrefController implements UserDao{
     private RadioButton lblPart4;
 
     @FXML
+    void handleC1(ActionEvent event) {
+    	sceltaCand = 1;
+    }
+
+    @FXML
+    void handleC2(ActionEvent event) {
+    	sceltaCand = 7;
+    }
+
+    @FXML
+    void handleC3(ActionEvent event) {
+    	sceltaCand = 4;
+    }
+
+    @FXML
+    void handleC4(ActionEvent event) {
+    	sceltaCand = 6;
+    	}
+
+    @FXML
+    void handleC5(ActionEvent event) {
+    	sceltaCand = 2;
+    }
+
+    @FXML
+    void handleC6(ActionEvent event) {
+    	sceltaCand = 5;
+    }
+
+    @FXML
+    void handleC7(ActionEvent event) {
+    	sceltaCand = 3;
+    }
+
+    @FXML
+    void handleC8(ActionEvent event) {
+    	sceltaCand = 8;
+    }
+
+    @FXML
+    void handleP1(ActionEvent event) {
+    	sceltaPart = 1;
+    }
+
+    @FXML
+    void handleP2(ActionEvent event) {
+    	sceltaPart = 2;
+    }
+
+    @FXML
+    void handleP3(ActionEvent event) {
+    	sceltaPart = 3;
+    }
+
+    @FXML
+    void handleP4(ActionEvent event) {
+    	sceltaPart = 4;
+    }
+    
+    @FXML
     private ToggleGroup votocandidato;
 
     @FXML
@@ -73,7 +136,48 @@ public class VotazioneCatConPrefController implements UserDao{
 
     @FXML
     void handleInvio(ActionEvent event) throws IOException {
+    	checkVoto();
     	pressInvio();
+    }
+    
+    //funzione che controlla non voto disgiunto
+    private void checkVoto() throws IOException{
+    	//prendo partito dal candidato votato
+    	int part = checkPart();
+    	if(sceltaCand == 0 || sceltaPart == 0) {
+    		//voto nullo
+    		System.out.println("VOTO NULLO");
+    	}else if(sceltaPart != part) {
+    		//voto disgiunto
+    		System.out.println("VOTO DISGIUNTO");
+    	}else {
+    		//voto corretto
+    		String sql = "update votocatconpref set nvoti = nvoti + 1 where idvotato = " + sceltaCand;
+    		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+    			PreparedStatement pr = conn.prepareStatement(sql);
+    				){
+    			int r = pr.executeUpdate(sql);
+    		} catch(Exception e) {
+    			e.printStackTrace();
+    		}
+    	}
+    }
+    
+    private int checkPart() throws IOException{
+    	int part = 0;
+		String sql = "select partito from candidati where idcand = " + sceltaCand;
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			
+			ResultSet rs= pr.executeQuery();
+			while(rs.next()) {
+				part = rs.getInt("partito");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return part;
     }
     
     private void pressInvio() throws IOException{
