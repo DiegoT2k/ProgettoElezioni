@@ -22,7 +22,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblVinc" contentDisplay="CENTER" layoutX="251.0" layoutY="165.0" prefHeight="35.0" prefWidth="200.0" textAlignment="CENTER">
+      <Label fx:id="lblVinc" contentDisplay="CENTER" layoutX="217.0" layoutY="165.0" prefHeight="35.0" text="Il vincitore è:" textAlignment="CENTER" visible="false">
          <font>
             <Font size="24.0" />
          </font>
