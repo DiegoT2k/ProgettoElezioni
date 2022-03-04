@@ -5,10 +5,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #f5cfa2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ConteggioController">
    <children>
-      <Button fx:id="btnAvanti" layoutX="313.0" layoutY="319.0" mnemonicParsing="false" onAction="#handleAvanti" text="Avanti">
+      <Button fx:id="btnAvanti" layoutX="313.0" layoutY="255.0" mnemonicParsing="false" onAction="#handleAvanti" text="Avanti">
          <font>
             <Font size="18.0" />
          </font>
@@ -23,7 +22,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblVinc" contentDisplay="CENTER" layoutX="251.0" layoutY="165.0" prefHeight="35.0" prefWidth="200.0" text="jgkhjkjh" textAlignment="CENTER" visible="false">
+      <Label fx:id="lblVinc" contentDisplay="CENTER" layoutX="251.0" layoutY="165.0" prefHeight="35.0" prefWidth="200.0" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>

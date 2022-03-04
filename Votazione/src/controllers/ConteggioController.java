@@ -35,18 +35,59 @@ public class ConteggioController implements UserDao{
     void initialize() throws IOException {
     	String mod = checkMod();
     	String modcalc = checkCalc();
-    	calcoloVinc(mod, modcalc);
-        displayVinc(mod, modcalc);
+    	int id = calcoloVinc(mod, modcalc);
+        displayVinc(mod, id);
         cleanVote(mod);
     }
     
     //funzione che calcola il vincitore se è presente
-    private void calcoloVinc(String mod, String modcalc) throws IOException{
-    	
+    private int calcoloVinc(String mod, String modcalc) throws IOException{
+    	int vincitore = 1;
+    	if(mod.equals("Voto categorico") && modcalc.equals("Maggioranza")) {
+    		int voti = 0;
+    		String sql = "select nvoti from votocategorico where idvotato = " + vincitore;
+    		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+    			PreparedStatement pr = conn.prepareStatement(sql);
+    				){
+    			ResultSet rs = pr.executeQuery(sql);
+    			while(rs.next()) { voti = rs.getInt("nvoti"); }
+    		} catch(Exception e) {
+    			e.printStackTrace();
+    		}
+    		for(int i = 2; i < 9; i++) {
+        		String sql2 = "select nvoti from votocategorico where idvotato = " + i;
+        		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+        			PreparedStatement pr = conn.prepareStatement(sql2);
+        				){
+        			ResultSet rs = pr.executeQuery(sql2);
+        			while(rs.next()) { 
+        				if(rs.getInt("nvoti") > voti) {
+        				voti = rs.getInt("nvoti");
+        				vincitore = i;
+        				}; 
+        			}
+        		} catch(Exception e) {
+        			e.printStackTrace();
+        		}
+    		}
+    	}
+    	return vincitore;
+
 	}
+    
     //funzione che mette a display il nome del vincitore o un messaggio di errore
-	private void displayVinc(String mod, String modcalc) throws IOException {
-    	
+	private void displayVinc(String mod, int vincitore) throws IOException {
+    	String cognome = "";
+		String sql = "select cognome from candidati where idcand = " + vincitore;
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			ResultSet rs = pr.executeQuery(sql);
+			while(rs.next()) { cognome = rs.getString("cognome"); }
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    	lblVinc.setText("Il vincitore è: " + cognome);
     }
 	
 	//funzione che resetta tutti i voti
@@ -64,6 +105,26 @@ public class ConteggioController implements UserDao{
 		}else if(mod.equals("Referendum")) {
 			//reset tabella votoreferendum
 			String sql = "update votoreferendum set counter = 0 where voto != 0";
+			try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+				PreparedStatement pr = conn.prepareStatement(sql);
+					){
+				int r = pr.executeUpdate(sql);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}else if(mod.equals("Voto ordinale")) {
+			//reset tabella votoordinale
+			String sql = "update votoordinale set voti = 0 where idcandvotato != 0";
+			try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+				PreparedStatement pr = conn.prepareStatement(sql);
+					){
+				int r = pr.executeUpdate(sql);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}			
+		}else if(mod.equals("Voto categorico con preferenze")) {
+			//reset tabella votocatconpref
+			String sql = "update votocatconpref set nvoti = 0 where idvotato != 0";
 			try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
 				PreparedStatement pr = conn.prepareStatement(sql);
 					){
@@ -121,7 +182,7 @@ public class ConteggioController implements UserDao{
 
 	@Override
 	public List<User> getUser() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	

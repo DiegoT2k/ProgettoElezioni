@@ -16,9 +16,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.input.MouseEvent;
 
 public class VotazioneOrdController implements UserDao{
 
+	int scelta = 0;
+	
     @FXML
     private ResourceBundle resources;
 
@@ -73,6 +76,46 @@ public class VotazioneOrdController implements UserDao{
     @FXML
     private Spinner<Integer> spn8;
       
+    @FXML
+    void handle1(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handle2(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handle3(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handle4(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handle5(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handle6(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handle7(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handle8(MouseEvent event) {
+
+    }
+    
     @FXML
     private Button btnInvio;
 
