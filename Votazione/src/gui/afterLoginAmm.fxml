@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="468.0" style="-fx-background-color: #f5cfa2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfterLoginControllerAmm">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #f5cfa2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfterLoginControllerAmm">
    <center>
       <AnchorPane maxHeight="300.0" prefHeight="32.0" prefWidth="469.0" style="-fx-background-color: #f5cfa2;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnOpen" layoutX="52.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleOpen" prefHeight="30.0" prefWidth="140.0" text="Apri sessione" AnchorPane.leftAnchor="50.0">
+            <Button fx:id="btnOpen" layoutX="52.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleOpen" prefHeight="30.0" prefWidth="140.0" text="Apri sessione" AnchorPane.leftAnchor="150.0">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -22,14 +22,17 @@
                   <Font size="17.0" />
                </font>
             </Button>
-            <Button fx:id="btnClose" layoutX="254.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleClose" prefHeight="30.0" prefWidth="140.0" text="Chiudi sessione" AnchorPane.rightAnchor="50.0">
+            <Button fx:id="btnClose" layoutX="254.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleClose" prefHeight="30.0" prefWidth="140.0" text="Chiudi sessione" AnchorPane.rightAnchor="150.0">
                <font>
                   <Font size="17.0" />
                </font></Button>
          </children>
          <BorderPane.margin>
-            <Insets bottom="20.0" top="60.0" />
-         </BorderPane.margin></AnchorPane>
+            <Insets bottom="20.0" top="90.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets top="10.0" />
+         </padding></AnchorPane>
    </center>
    <top>
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="101.0" prefWidth="564.0" style="-fx-background-color: #f5cfa2;" text="Pagina Amministratore" textAlignment="CENTER" textFill="#133263" BorderPane.alignment="CENTER">
@@ -56,6 +59,9 @@
                </font>
             </Label>
          </center>
+         <padding>
+            <Insets top="50.0" />
+         </padding>
       </BorderPane>
    </bottom>
 </BorderPane>

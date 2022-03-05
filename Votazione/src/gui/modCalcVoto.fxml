@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #e8c899;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModCalcVotoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #f5cfa2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModCalcVotoController">
    <top>
       <Label alignment="CENTER" contentDisplay="CENTER" text="Calcolo vincitore votazione" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -26,7 +26,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <GridPane layoutX="31.0" layoutY="1.0" prefHeight="234.0" prefWidth="439.0">
+            <GridPane layoutX="130.0" prefHeight="234.0" prefWidth="439.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -66,7 +66,7 @@
                         <Insets left="70.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="btnOk" mnemonicParsing="false" onAction="#handleOk" prefHeight="18.0" prefWidth="68.0" text="Ok" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button fx:id="btnOk" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleOk" prefHeight="18.0" prefWidth="68.0" text="Ok" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <padding>
                         <Insets bottom="6.0" left="15.0" right="15.0" top="6.0" />
                      </padding>

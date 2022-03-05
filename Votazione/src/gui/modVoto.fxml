@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #e8c899;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.modVotoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #f5cfa2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.modVotoController">
    <top>
       <Label alignment="CENTER" contentDisplay="CENTER" text="Impostazioni sessione di voto" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -24,9 +24,9 @@
       </Label>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="279.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
-            <GridPane prefHeight="237.0" prefWidth="500.0">
+            <GridPane alignment="CENTER" layoutX="100.0" layoutY="14.0" prefHeight="237.0" prefWidth="500.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="10.0" prefWidth="270.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="230.0" />

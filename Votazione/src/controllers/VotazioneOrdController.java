@@ -19,8 +19,6 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.input.MouseEvent;
 
 public class VotazioneOrdController implements UserDao{
-
-	int scelta = 0;
 	
     @FXML
     private ResourceBundle resources;
@@ -83,7 +81,7 @@ public class VotazioneOrdController implements UserDao{
 
     @FXML
     void handle2(MouseEvent event) {
-
+    	
     }
 
     @FXML
@@ -113,7 +111,7 @@ public class VotazioneOrdController implements UserDao{
 
     @FXML
     void handle8(MouseEvent event) {
-
+    	
     }
     
     @FXML
@@ -124,10 +122,14 @@ public class VotazioneOrdController implements UserDao{
     	pressInvio();
     }
     
-    private void pressInvio() throws IOException{
+    private void pressInvio() throws IOException{   	
     	Main m = new Main();
     	m.changeScene("../gui/invioVoto.fxml");
     }
+    
+    /*private boolean checkVoti(){
+    	i
+    }*/
     
     @FXML
     void initialize() throws IOException{
@@ -156,6 +158,7 @@ public class VotazioneOrdController implements UserDao{
         spn8.setValueFactory(svf8);
         
     }
+    
     
     private void riempiCampi() throws IOException{
        	//seleziona candidati

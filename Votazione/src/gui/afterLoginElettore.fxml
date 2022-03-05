@@ -6,12 +6,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="468.0" style="-fx-background-color: #f5cfa2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfterLoginControllerElettore">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #f5cfa2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfterLoginControllerElettore">
    <center>
       <AnchorPane maxHeight="300.0" prefHeight="32.0" prefWidth="469.0" style="-fx-background-color: #f5cfa2;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnOpen" alignment="CENTER" contentDisplay="CENTER" layoutX="52.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleOpen" prefHeight="30.0" prefWidth="140.0" text="Vota" textAlignment="JUSTIFY" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0">
+            <Button fx:id="btnOpen" alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleOpen" prefHeight="37.0" prefWidth="98.0" text="Vota" textAlignment="JUSTIFY" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="302.0" AnchorPane.topAnchor="53.0">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -22,15 +23,16 @@
                   <Font size="17.0" />
                </font>
             </Button>
+            <Text layoutX="270.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Premere 'Vota' per proseguire" AnchorPane.rightAnchor="271.3984375" AnchorPane.topAnchor="10.0" />
          </children>
          <BorderPane.margin>
             <Insets bottom="20.0" top="20.0" />
          </BorderPane.margin></AnchorPane>
    </center>
    <top>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="101.0" prefWidth="564.0" style="-fx-background-color: #f5cfa2;" text="Pagina Elettore" textAlignment="CENTER" textFill="#204c8c" BorderPane.alignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="564.0" style="-fx-background-color: #f5cfa2;" text="Benvenuto" textAlignment="CENTER" textFill="#204c8c" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets top="70.0" />
+            <Insets top="20.0" />
          </BorderPane.margin>
          <font>
             <Font size="32.0" />
