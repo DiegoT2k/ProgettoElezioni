@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 
 public class VotazioneOrdController implements UserDao{
 	
+	int voti[]= new int[8];
     @FXML
     private ResourceBundle resources;
 
@@ -76,42 +77,43 @@ public class VotazioneOrdController implements UserDao{
       
     @FXML
     void handle1(MouseEvent event) {
-
+    	System.out.println(spn1.getValue());
+    	voti[0]=spn1.getValue();
     }
 
     @FXML
     void handle2(MouseEvent event) {
-    	
+    	voti[1]=spn2.getValue();
     }
 
     @FXML
     void handle3(MouseEvent event) {
-
+    	voti[2]=spn3.getValue();
     }
 
     @FXML
     void handle4(MouseEvent event) {
-
+    	voti[3]=spn4.getValue();
     }
 
     @FXML
     void handle5(MouseEvent event) {
-
+    	voti[4]=spn5.getValue();
     }
 
     @FXML
     void handle6(MouseEvent event) {
-
+    	voti[5]=spn6.getValue();
     }
 
     @FXML
     void handle7(MouseEvent event) {
-
+    	voti[6]=spn7.getValue();
     }
 
     @FXML
     void handle8(MouseEvent event) {
-    	
+    	voti[7]=spn8.getValue();
     }
     
     @FXML
@@ -119,17 +121,64 @@ public class VotazioneOrdController implements UserDao{
 
     @FXML
     void handleInvio(ActionEvent event) throws IOException {
+    	checkVoti();
     	pressInvio();
     }
     
-    private void pressInvio() throws IOException{   	
+    private void pressInvio() throws IOException{  
     	Main m = new Main();
     	m.changeScene("../gui/invioVoto.fxml");
     }
     
-    /*private boolean checkVoti(){
-    	i
-    }*/
+    private void checkVoti(){
+    	voti[0]=spn1.getValue();
+        voti[1]=spn2.getValue();
+        voti[2]=spn3.getValue();
+        voti[3]=spn4.getValue();
+        voti[4]=spn5.getValue();
+        voti[5]=spn6.getValue();
+        voti[6]=spn7.getValue();
+        voti[7]=spn8.getValue();
+        
+        //controllo scheda bianca
+        int sommaTot=0;
+        for(int i=0;i<8;i++) {
+    		sommaTot=sommaTot+voti[i];
+    	}
+        if(sommaTot==0) {
+        	System.out.println("Scheda bianca");
+        	return;
+        }
+        //controllo voti diversi
+        for(int i=0;i<8;i++) {
+        	if(voti[i]==0) {
+        		System.out.println("Voto nullo");
+        		return;
+        	}
+        	for(int j=0;j<8;j++) {
+        		if(i!=j) {
+        			if (voti[i]==voti[j]) {
+	        			System.out.println("Voto nullo");
+	        			return;
+        			}
+        		}
+        		
+        	}
+    	}
+        //Caso voto valido-->storing voti
+        for(int i=0;i<8;i++) {
+    		String sql = "update votoordinale set voti= voti + "+ voti[i]+" where idcandvotato= "+ (i+1);
+			try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+					PreparedStatement pr = conn.prepareStatement(sql);
+						){
+					int rs = pr.executeUpdate();
+					
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+    	}
+        return;
+    }
     
     @FXML
     void initialize() throws IOException{

@@ -31,22 +31,22 @@
                   <Label fx:id="lblCand2" GridPane.rowIndex="1" />
                   <Label fx:id="lblCand3" GridPane.rowIndex="2" />
                   <Label fx:id="lblCand4" GridPane.rowIndex="3" />
-                  <Spinner fx:id="spn1" onDragDetected="#handle1" prefHeight="25.0" prefWidth="60.0" GridPane.columnIndex="1">
+                  <Spinner fx:id="spn1" prefHeight="25.0" prefWidth="60.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="40.0" />
                      </GridPane.margin>
                   </Spinner>
-                  <Spinner fx:id="spn2" onDragDetected="#handle2" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Spinner fx:id="spn2" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="40.0" />
                      </GridPane.margin>
                   </Spinner>
-                  <Spinner fx:id="spn3" onDragDetected="#handle3" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Spinner fx:id="spn3" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="40.0" />
                      </GridPane.margin>
                   </Spinner>
-                  <Spinner fx:id="spn4" onDragDetected="#handle4" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Spinner fx:id="spn4" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="40.0" />
                      </GridPane.margin>
@@ -73,22 +73,22 @@
                   <Label fx:id="lblCand6" GridPane.rowIndex="1" />
                   <Label fx:id="lblCand7" GridPane.rowIndex="2" />
                   <Label fx:id="lblCand8" GridPane.rowIndex="3" />
-                  <Spinner fx:id="spn5" onDragDetected="#handle5" prefHeight="25.0" prefWidth="60.0" GridPane.columnIndex="1">
+                  <Spinner fx:id="spn5" prefHeight="25.0" prefWidth="60.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="40.0" />
                      </GridPane.margin>
                   </Spinner>
-                  <Spinner fx:id="spn6" onDragDetected="#handle6" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Spinner fx:id="spn6" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="40.0" />
                      </GridPane.margin>
                   </Spinner>
-                  <Spinner fx:id="spn7" onDragDetected="#handle7" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Spinner fx:id="spn7" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="40.0" />
                      </GridPane.margin>
                   </Spinner>
-                  <Spinner fx:id="spn8" onDragDetected="#handle8" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Spinner fx:id="spn8" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="40.0" />
                      </GridPane.margin>
