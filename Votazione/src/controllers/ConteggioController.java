@@ -45,10 +45,10 @@ public class ConteggioController implements UserDao{
     }
     
     private void displayRef(int vincitore) {
-    	if (vincitore==1) {
+    	if (vincitore == 1) {
 	    	lblVinc.setText("Il risultato del referendum è: Si");
 	    	lblVinc.setVisible(true);
-    	}else if (vincitore==0) {
+    	}else if (vincitore == 0) {
 	    	lblVinc.setText("Il risultato del referendum è: No");
 	    	lblVinc.setVisible(true);
     	}else {
@@ -61,21 +61,22 @@ public class ConteggioController implements UserDao{
     private int calcoloVinc(String mod, String modcalc) throws IOException{
     	int vincitore=0;
     	if(mod.equals("Voto categorico") && modcalc.equals("Maggioranza")) {
-    	    vincitore=CatMag(mod,modcalc);
+    	    vincitore = CatMag(mod,modcalc);
     	}else if(mod.equals("Voto categorico") && modcalc.equals("Maggioranza assoluta")){
-    	    vincitore=CatMagAss(mod,modcalc);
+    	    vincitore = CatMagAss(mod, modcalc);
     	}else if(mod.equals("Referendum") && modcalc.equals("Quorum")){
-    	    vincitore=RefQuorum(mod,modcalc);
+    	    vincitore = RefQuorum(mod, modcalc);
     	}else if(mod.equals("Referendum") && modcalc.equals("Senza Quorum")){
-    	    vincitore=RefNoQuorum(mod,modcalc);
+    	    vincitore = RefNoQuorum(mod, modcalc);
     	}
     	return vincitore;
 
 	}
-    
+    /**
+     * 
     private int RefNoQuorum(String mod, String modcalc) {
-    	int votiSi=0,votiNo=0;
-    	String sql = "select * from votoreferendum where voto!='Astensione' order by counter desc";
+    	int votiSi = 0, votiNo = 0;
+    	String sql = "select * from votoreferendum where voto != 'Astensione' order by counter desc";
 		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
 			PreparedStatement pr = conn.prepareStatement(sql);
 				){
@@ -83,16 +84,19 @@ public class ConteggioController implements UserDao{
 			while(rs.next()) { 
 				System.out.println(rs.getString("voto"));
 				System.out.println(rs.getInt("counter"));
+				
 				if(rs.getString("voto").equals("Si")) {
-					votiSi=rs.getInt("counter");
+					votiSi = rs.getInt("counter");
 				}else {
-					votiNo=rs.getInt("counter");
-				}
+					votiNo = rs.getInt("counter");
+				}	 
+				
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(votiSi);
+		
+		 System.out.println(votiSi);
 		System.out.println(votiNo);
 		if(votiSi>votiNo) {
 			return 1;
@@ -101,12 +105,34 @@ public class ConteggioController implements UserDao{
 		}else {
 			return 2;
 		}
+		 
+	}
+     */
+
+    private int RefNoQuorum(String mod, String modcalc) {
+    	String sql = "select voto from votoreferendum where voto = 'Si' OR voto = 'No' order by counter desc limit 1";
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			ResultSet rs = pr.executeQuery(sql);
+			while(rs.next()) {
+				if(rs.getString("voto").equals("Si")) {
+					return 1;
+				}else {
+					return 0;
+				}	 
+				
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 	private int RefQuorum(String mod, String modcalc) {
     	int votiTot=0,vincitore=2,nvotanti=0;
     	//Calcola se vince il si o il no
-    	String sql = "select voto from votoreferendum where voto!='Astensione' order by counter desc limit 1";
+    	String sql = "select voto from votoreferendum where voto != 'Astensione' order by counter desc limit 1";
 		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
 			PreparedStatement pr = conn.prepareStatement(sql);
 				){
