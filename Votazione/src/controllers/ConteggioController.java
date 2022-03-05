@@ -37,14 +37,27 @@ public class ConteggioController implements UserDao{
     	String modcalc = checkCalc();
     	int id = calcoloVinc(mod, modcalc);
     	if (mod.equals("Referendum")) {
-    		//displayRef();
+    		displayRef(id);
     	}else {
-    		displayVinc(mod, id);
+    		displayVinc(id);
     	}
         cleanVote(mod);
     }
     
-    //funzione che calcola il vincitore se è presente
+    private void displayRef(int vincitore) {
+    	if (vincitore==1) {
+	    	lblVinc.setText("Il risultato del referendum è: Si");
+	    	lblVinc.setVisible(true);
+    	}else if (vincitore==0) {
+	    	lblVinc.setText("Il risultato del referendum è: No");
+	    	lblVinc.setVisible(true);
+    	}else {
+    		lblErr.setVisible(true);
+    	}
+		
+	}
+
+	//funzione che calcola il vincitore se è presente
     private int calcoloVinc(String mod, String modcalc) throws IOException{
     	int vincitore=0;
     	if(mod.equals("Voto categorico") && modcalc.equals("Maggioranza")) {
@@ -53,26 +66,92 @@ public class ConteggioController implements UserDao{
     	    vincitore=CatMagAss(mod,modcalc);
     	}else if(mod.equals("Referendum") && modcalc.equals("Quorum")){
     	    vincitore=RefQuorum(mod,modcalc);
+    	}else if(mod.equals("Referendum") && modcalc.equals("Senza Quorum")){
+    	    vincitore=RefNoQuorum(mod,modcalc);
     	}
     	return vincitore;
 
 	}
     
-    private int RefQuorum(String mod, String modcalc) {
-    	int voti = 0,votiTot=0,vincitore=0;
-    	String sql = "select voto from votoreferendum where idvotato = " + vincitore;
+    private int RefNoQuorum(String mod, String modcalc) {
+    	int votiSi=0,votiNo=0;
+    	String sql = "select * from votoreferendum where voto!='Astensione' order by counter desc";
 		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
 			PreparedStatement pr = conn.prepareStatement(sql);
 				){
 			ResultSet rs = pr.executeQuery(sql);
 			while(rs.next()) { 
-				voti = rs.getInt("nvoti"); 
-				votiTot = votiTot + voti;
+				System.out.println(rs.getString("voto"));
+				System.out.println(rs.getInt("counter"));
+				if(rs.getString("voto").equals("Si")) {
+					votiSi=rs.getInt("counter");
+				}else {
+					votiNo=rs.getInt("counter");
+				}
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return 0;
+		System.out.println(votiSi);
+		System.out.println(votiNo);
+		if(votiSi>votiNo) {
+			return 1;
+		}else if(votiSi<votiNo){
+			return 0;
+		}else {
+			return 2;
+		}
+	}
+
+	private int RefQuorum(String mod, String modcalc) {
+    	int votiTot=0,vincitore=2,nvotanti=0;
+    	//Calcola se vince il si o il no
+    	String sql = "select voto from votoreferendum where voto!='Astensione' order by counter desc limit 1";
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			ResultSet rs = pr.executeQuery(sql);
+			while(rs.next()) { 
+				System.out.println(rs.getString("voto"));
+				if(rs.getString("voto").equals("Si")) {
+					vincitore = 1;
+				}else {
+					vincitore = 0;
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		/*//controllo quorum: num totale che possono votare
+		String sql2 = "select count(*) from credentials where amm!='1'";
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql2);
+				){
+			ResultSet rs = pr.executeQuery(sql2);
+			while(rs.next()) { 
+				nvotanti=rs.getInt("count(*)");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		//controllo quorum: num di voti tot
+		String sql3 = "select sum(counter) from votoreferendum";
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql3);
+				){
+			ResultSet rs = pr.executeQuery(sql3);
+			while(rs.next()) { 
+				votiTot=rs.getInt("sum(counter)");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		if (votiTot>(nvotanti/2)) {
+			return vincitore;
+		}
+		return 2;*/
+		System.out.println(vincitore);
+		return vincitore;
 	}
 
 	private int CatMagAss(String mod, String modcalc) {
@@ -117,7 +196,7 @@ public class ConteggioController implements UserDao{
 	}
 
 	//funzione che mette a display il nome del vincitore o un messaggio di errore
-	private void displayVinc(String mod, int vincitore) throws IOException {
+	private void displayVinc(int vincitore) throws IOException {
     	if (vincitore!=0) {
     		String cognome = "";
 			String sql = "select cognome from candidati where idcand = " + vincitore;
