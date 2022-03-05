@@ -19,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 public class ConteggioController implements UserDao{
 	
 	String vinc;
+	
     @FXML
     private ResourceBundle resources;
 
@@ -67,7 +68,7 @@ public class ConteggioController implements UserDao{
     	}else if(mod.equals("Referendum") && modcalc.equals("Quorum")){
     	    //vincitore = RefQuorum(mod, modcalc);
     	}else if(mod.equals("Referendum") && modcalc.equals("Senza Quorum")){
-    	    //vincitore = RefNoQuorum(mod, modcalc);
+    	    vincitore = RefNoQuorum();
     	}else if(mod.equals("Voto categorico con preferenze") && modcalc.equals("Maggioranza")){
     	    //vincitore = CatPrefMag();
     	}else if(mod.equals("Voto categorico con preferenze") && modcalc.equals("Maggioranza assoluta")){
@@ -117,16 +118,18 @@ public class ConteggioController implements UserDao{
 	}
      */
 
-    private int RefNoQuorum(String mod, String modcalc) {
-    	String sql = "select voto from votoreferendum where voto = 'Si' OR voto = 'No' order by counter desc limit 1";
+    private int RefNoQuorum() {
+    	String sql = "select voto from votoreferendum where counter = ( select max(counter) from votoreferendum))";
 		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
 			PreparedStatement pr = conn.prepareStatement(sql);
 				){
-			ResultSet rs = pr.executeQuery(sql);
+			ResultSet rs = pr.executeQuery();
 			while(rs.next()) {
 				if(rs.getString("voto").equals("Si")) {
+					System.out.println("NON ARRIVA QUA");
 					return 1;
 				}else {
+					System.out.println("ARRIVA QUA SEMPRE QUA " + rs.getString("voto"));
 					return 0;
 				}	 
 				
