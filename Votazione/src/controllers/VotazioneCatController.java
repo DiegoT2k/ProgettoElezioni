@@ -17,7 +17,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
 public class VotazioneCatController implements UserDao{
-
+	
+	int scelta = 0;
+	
     @FXML
     private ResourceBundle resources;
 
@@ -62,7 +64,67 @@ public class VotazioneCatController implements UserDao{
     
     @FXML
     private ToggleGroup voto;
+    
+    @FXML
+    void handleC1(ActionEvent event) {
+    	scelta = 1;
+    }
 
+    @FXML
+    void handleC2(ActionEvent event) {
+    	scelta = 7;
+    }
+
+    @FXML
+    void handleC3(ActionEvent event) {
+    	scelta = 4;
+    }
+
+    @FXML
+    void handleC4(ActionEvent event) {
+    	scelta = 6;
+    	}
+
+    @FXML
+    void handleC5(ActionEvent event) {
+    	scelta = 2;
+    }
+
+    @FXML
+    void handleC6(ActionEvent event) {
+    	scelta = 5;
+    }
+
+    @FXML
+    void handleC7(ActionEvent event) {
+    	scelta = 3;
+    }
+
+    @FXML
+    void handleC8(ActionEvent event) {
+    	scelta = 8;
+    }
+
+    @FXML
+    void handleP1(ActionEvent event) {
+    	scelta = 1;
+    }
+
+    @FXML
+    void handleP2(ActionEvent event) {
+    	scelta = 4;
+    }
+
+    @FXML
+    void handleP3(ActionEvent event) {
+    	scelta = 2;
+    }
+
+    @FXML
+    void handleP4(ActionEvent event) {
+    	scelta = 3;
+    }
+    
     private void riempiPart() throws IOException{
        	//seleziona partiti
     		String sql = "select nome from partiti";
@@ -155,6 +217,16 @@ public class VotazioneCatController implements UserDao{
 
     @FXML
     void handleInvio(ActionEvent event) throws IOException {
+    	//aggiungo voto candidati + conn db
+		String sql = "update votocategorico set nvoti = nvoti + 1 where idvotato = " + scelta;
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			int r = pr.executeUpdate(sql);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
     	pressInvio();
     }
     
@@ -177,7 +249,7 @@ public class VotazioneCatController implements UserDao{
 
 	@Override
 	public List<User> getUser() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
