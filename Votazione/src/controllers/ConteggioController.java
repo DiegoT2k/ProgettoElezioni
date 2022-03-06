@@ -44,7 +44,7 @@ public class ConteggioController implements UserDao{
     	if (mod.equals("Referendum")) {
     		displayRef(id);
     	}else {
-    		displayVinc(id);
+    		displayVinc(id, mod);
     	}
         //cleanVote(mod);
     }
@@ -74,9 +74,9 @@ public class ConteggioController implements UserDao{
     	}else if(mod.equals("Referendum") && modcalc.equals("Senza Quorum")){
     	    vincitore = RefNoQuorum();
     	}else if(mod.equals("Voto categorico con preferenze") && modcalc.equals("Maggioranza")){
-    	    //vincitore = CatPrefMag();
+    	    vincitore = CatPrefMag();
     	}else if(mod.equals("Voto categorico con preferenze") && modcalc.equals("Maggioranza assoluta")){
-    	    //vincitore = CatPrefMagAss();
+    	    vincitore = CatPrefMagAss();
     	}else if(mod.equals("Voto ordinale") && modcalc.equals("Maggioranza")){
     	    vincitore = OrdMag();
     	}else if(mod.equals("Voto ordinale") && modcalc.equals("Maggioranza assoluta")){
@@ -321,9 +321,166 @@ public class ConteggioController implements UserDao{
 		return vincitore;
 	}
 	
+	//conta i voti del partito i
+	private int countVoti(int i) {
+		String sql = "select sum(nvoti) from votocatconpref where idvotato in ( select idcand from candidati where partito = "+i+")"; 
+		int voti = 0;
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+				PreparedStatement pr = conn.prepareStatement(sql);
+					){
+			
+			ResultSet rs = pr.executeQuery();
+			while(rs.next()) {
+				voti = rs.getInt("sum(nvoti)"); 
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	
+		return voti;
+	}
+	
+	//restituisce candidato maggior numero di voti nel partito
+	private int countVotiCand(int i) {
+		int nvinc = 0;
+		int vincitore = 1;
+		String sql = "select idvotato from votocatconpref where nvoti=(select MAX(nvoti) from votocatconpref where idvotato in (select idcand from candidati where partito = "+i+" ))";
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql);
+				){
+			ResultSet rs = pr.executeQuery(sql);
+			while(rs.next()) { 
+				vincitore=rs.getInt("idvotato");
+				nvinc++;
+			}
+			if (nvinc>1) {
+				lblErrQuorum.setText("Nessun candidato ha ottenuto la maggioranza");
+				lblErrQuorum.setVisible(true);
+				lblErr.setVisible(true);
+				return 0;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return vincitore;
+	}
+	
+	private int CatPrefMag() {
+		int vincitore = 0;
+		
+		int part1 = countVoti(1);
+		int part2 = countVoti(2);
+		int part3 = countVoti(3);
+		int part4 = countVoti(4);
+		
+		if(part1 > part2 && part1 > part3 && part1 > part4) {
+			vincitore = countVotiCand(1);
+		}else if(part2 > part1 && part2 > part3 && part2 > part4) {
+			vincitore = countVotiCand(2);
+		}else if(part3 > part1 && part3 > part2 && part3 > part4) {
+			vincitore = countVotiCand(3);
+		}else if(part4 > part3 && part4 > part2 && part4 > part1) {
+			vincitore = countVotiCand(4);
+		}else{
+			vincitore = 0;
+		}
+		
+		return vincitore;
+	}
+	
+	private int CatPrefMagAss() {
+		int vincitore = 0;
+		
+		int part1 = countVoti(1);
+		int part2 = countVoti(2);
+		int part3 = countVoti(3);
+		int part4 = countVoti(4);
+		
+		int votiTot = 0;
+    	String sql3 = "select sum(nvoti) from votocatconpref";
+    	try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+    		PreparedStatement pr = conn.prepareStatement(sql3);
+    			){
+    		ResultSet rs = pr.executeQuery(sql3);
+    		while(rs.next()) { 
+    			votiTot = rs.getInt("sum(nvoti)");
+    			}
+    		} catch(Exception e) {
+    			e.printStackTrace();
+    		}
+    	
+		if(part1 > part2 && part1 > part3 && part1 > part4) {
+			vincitore = countVotiCand(1);
+			if(countVoti(1)>(votiTot/2)) {
+				return vincitore;
+			}
+			lblErrQuorum.setText("Nessun candidato ha ottenuto la maggioranza assoluta");
+			lblErrQuorum.setVisible(true);
+			lblErr.setVisible(true);
+			return 0;
+		}else if(part2 > part1 && part2 > part3 && part2 > part4) {
+			vincitore = countVotiCand(2);
+			if(countVoti(2)>(votiTot/2)) {
+				return vincitore;
+			}
+			lblErrQuorum.setText("Nessun candidato ha ottenuto la maggioranza assoluta");
+			lblErrQuorum.setVisible(true);
+			lblErr.setVisible(true);
+			return 0;
+		}else if(part3 > part1 && part3 > part2 && part3 > part4) {
+			vincitore = countVotiCand(3);
+			if(countVoti(3)>(votiTot/2)) {
+				return vincitore;
+			}
+			lblErrQuorum.setText("Nessun candidato ha ottenuto la maggioranza assoluta");
+			lblErrQuorum.setVisible(true);
+			lblErr.setVisible(true);
+			return 0;
+		}else if(part4 > part3 && part4 > part2 && part4 > part1) {
+			vincitore = countVotiCand(4);
+			if(countVoti(4)>(votiTot/2)) {
+				return vincitore;
+			}
+			lblErrQuorum.setText("Nessun candidato ha ottenuto la maggioranza assoluta");
+			lblErrQuorum.setVisible(true);
+			lblErr.setVisible(true);
+			return 0;
+		}else{
+			vincitore = 0;
+		}
+	
+		return vincitore;
+	}
+	
 	//funzione che mette a display il nome del vincitore o un messaggio di errore
-	private void displayVinc(int vincitore) throws IOException {
-    	if (vincitore!=0) {
+	private void displayVinc(int vincitore, String mod) throws IOException {
+		
+		if(mod.equals("Voto categorico con preferenze")) {
+			
+			if (vincitore!=0) {
+	    		String cognome = "";
+	    		String partito = "";
+				String sql = "select cognome, partito from candidati where idcand = " + vincitore;
+				try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+					PreparedStatement pr = conn.prepareStatement(sql);
+						){
+					ResultSet rs = pr.executeQuery(sql);
+					while(rs.next()) { cognome = rs.getString("cognome"); partito = rs.getString("partito");}
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+		    	lblVinc.setText("Il vincitore è: " + cognome + ", del partito: " + partito);
+		    	lblVinc.setVisible(true);
+	    	}else {
+	    		lblErr.setVisible(true);
+	    	}
+			
+		}else if(mod.equals("Voto categorico con preferenze") ){
+			
+		}else {
+			
+		if (vincitore != 0) {
     		String cognome = "";
 			String sql = "select cognome from candidati where idcand = " + vincitore;
 			try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
@@ -338,7 +495,11 @@ public class ConteggioController implements UserDao{
 	    	lblVinc.setVisible(true);
     	}else {
     		lblErr.setVisible(true);
-    	}
+    	}	
+			
+		}
+		
+    	
 		
     }
 	

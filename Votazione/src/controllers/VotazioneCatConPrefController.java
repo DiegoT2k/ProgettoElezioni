@@ -21,7 +21,7 @@ public class VotazioneCatConPrefController implements UserDao{
 	int sceltaCand = 0;
 	int sceltaPart = 0;
 	
-	String votoPart="",votoCand;
+	String votoPart="", votoCand;
 	
     @FXML
     private ResourceBundle resources;
