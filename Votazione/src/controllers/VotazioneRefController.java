@@ -66,14 +66,17 @@ public class VotazioneRefController implements UserDao{
     
     private void pressInvio() throws IOException{
     	if(!scelta.equals("")) {
-    		String sql = "update votoreferendum set counter=counter+1 where voto='"+ scelta +"'";
-        	try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
-        			PreparedStatement pr = conn.prepareStatement(sql);
-        				){
-        		int rs = pr.executeUpdate();	
-        	} catch(Exception e) {
-        		e.printStackTrace();
-        	}
+    		if(!scelta.equals("Astensione")) {
+    			String sql = "update votoreferendum set counter=counter+1 where voto='"+ scelta +"'";
+	        	try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+	        			PreparedStatement pr = conn.prepareStatement(sql);
+	        				){
+	        		int rs = pr.executeUpdate();	
+	        	} catch(Exception e) {
+	        		e.printStackTrace();
+	        	}
+    		}
+    		
     		Main m = new Main();
     		m.changeScene("../gui/invioVoto.fxml");
     	}

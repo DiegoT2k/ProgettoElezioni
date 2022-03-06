@@ -79,45 +79,12 @@ public class AfterLoginControllerAmm implements UserDao{
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		resetVoti();
-		resetRef();
 		
     	//Apertura pagina conteggio voti
     	Main m = new Main();
     	m.changeScene("../gui/conteggio.fxml");
     }
-    
-    //resetta i voti e il quesito di referendum
-	private void resetRef() throws IOException{
-    	String sql = "update session set domandaReferendum = NULL";
-		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
-			PreparedStatement pr = conn.prepareStatement(sql);
-				){
-			int rs = pr.executeUpdate(sql);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		sql = "update votoreferendum set counter=0";
-		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
-			PreparedStatement pr = conn.prepareStatement(sql);
-				){
-			int rs = pr.executeUpdate(sql);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-    }
-    
-    private void resetVoti() throws IOException{
-    	String sql = "update userdata set voto = 0";
-		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
-			PreparedStatement pr = conn.prepareStatement(sql);
-				){
-			int rs = pr.executeUpdate(sql);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-    }
-    
+        
     private void openSession() throws IOException{
     	/**
     	 * Controllo che la sessione sia effettivamente chiusa
