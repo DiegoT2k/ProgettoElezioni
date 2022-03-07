@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #f5cfa2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f5cfa2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
    <top>
       <Label text="Login" textFill="#e00909" BorderPane.alignment="CENTER">
          <font>
@@ -77,13 +77,21 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="btnAcc" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAcc" prefHeight="35.0" prefWidth="200.0" text="Accedi">
+                  <Button fx:id="btnAcc" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAcc" prefHeight="24.0" prefWidth="168.0" text="Accedi">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                      <font>
                         <Font size="15.0" />
                      </font>
+                  </Button>
+                  <Button fx:id="btnReg" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleReg" prefHeight="24.0" prefWidth="168.0" text="Registrazione">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
                   </Button>
                </children>
             </HBox>

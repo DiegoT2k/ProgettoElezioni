@@ -30,6 +30,9 @@ public class Controller implements UserDao{
 
     @FXML
     private Button btnAcc;
+    
+    @FXML
+    private Button btnReg;
 
     @FXML
     private Label lblMessage;
@@ -62,6 +65,12 @@ public class Controller implements UserDao{
     	checkLogin();
     }
 
+    @FXML
+    public void handleReg(ActionEvent event) throws IOException{
+    	Main m = new Main();
+    	m.changeScene("../gui/registrazione.fxml");
+    }
+    
 	private void checkLogin() throws IOException{
     	
     	Main m = new Main();
