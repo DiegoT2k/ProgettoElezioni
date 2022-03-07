@@ -77,43 +77,42 @@ public class VotazioneOrdController implements UserDao{
       
     @FXML
     void handle1(MouseEvent event) {
-    	System.out.println(spn1.getValue());
-    	voti[0]=spn1.getValue();
+    	voti[0]=9-spn1.getValue();
     }
 
     @FXML
     void handle2(MouseEvent event) {
-    	voti[1]=spn2.getValue();
+    	voti[1]=9-spn2.getValue();
     }
 
     @FXML
     void handle3(MouseEvent event) {
-    	voti[2]=spn3.getValue();
+    	voti[2]=9-spn3.getValue();
     }
 
     @FXML
     void handle4(MouseEvent event) {
-    	voti[3]=spn4.getValue();
+    	voti[3]=9-spn4.getValue();
     }
 
     @FXML
     void handle5(MouseEvent event) {
-    	voti[4]=spn5.getValue();
+    	voti[4]=9-spn5.getValue();
     }
 
     @FXML
     void handle6(MouseEvent event) {
-    	voti[5]=spn6.getValue();
+    	voti[5]=9-spn6.getValue();
     }
 
     @FXML
     void handle7(MouseEvent event) {
-    	voti[6]=spn7.getValue();
+    	voti[6]=9-spn7.getValue();
     }
 
     @FXML
     void handle8(MouseEvent event) {
-    	voti[7]=spn8.getValue();
+    	voti[7]=9-spn8.getValue();
     }
     
     @FXML

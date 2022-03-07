@@ -12,7 +12,10 @@ import dao.DaoUsername;
 import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -29,25 +32,24 @@ public class Controller implements UserDao{
     private Button btnAcc;
 
     @FXML
-    private Button btnReg;
-
-    @FXML
     private Label lblMessage;
 
     @FXML
     private PasswordField lblPassword;
 
     @FXML
+    private CheckBox chckPw;
+
+    @FXML
     private TextField lblUsername;
     
     @FXML
     void handlePassword(ActionEvent event) {
-
+    	
     }
-
+    
     @FXML
-    void handleReg(ActionEvent event) {
-
+    void handleCheck(ActionEvent event) {
     }
 
     @FXML
@@ -59,48 +61,56 @@ public class Controller implements UserDao{
     public void handleAcc(ActionEvent event) throws IOException{
     	checkLogin();
     }
-    
-    private void checkLogin() throws IOException{
+
+	private void checkLogin() throws IOException{
     	
     	Main m = new Main();
     	String username = lblUsername.getText();
     	String pw = lblPassword.getText();
-
-
-        DaoUsername dao = new DaoUsername();
-        List<User> user = dao.getUser();
-        
-        
-        for(User u: user) {
-        	
-        	if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("1")) {
-        		
-        		m.changeScene("../gui/afterLoginAmm.fxml"); //scena amministratore
-        		
-        	}else if(checkSession()) {//controlla che la sessione sia aperta
-
-        		if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("0") && checkVoto(u.username)) { 
-	        		// elettore deve ancora votare
-	        		//imposto che ha votato
-	        		voto(username);
-	        		m.changeScene("../gui/afterLoginElettore.fxml"); //scena elettore
-        		}else if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("0") && !checkVoto(u.username)) {
-	        		// elettore ha già votato
-	        		String messaggio = "L'utente ha già votato";
-	        		lblMessage.setText(messaggio);
-	        		lblMessage.setVisible(true);
-	        		break;
-        		}else{
-	        		String messaggio = "Username o Password errati!";
-	        		lblMessage.setText(messaggio);
-	        		lblMessage.setVisible(true);
-        		}
-        	} else {
-        		String messaggio = "La sessione di voto è chiusa";
-        		lblMessage.setText(messaggio);
-        		lblMessage.setVisible(true);
-        	}
-        }
+    	
+    	if((username.isEmpty())||(pw.isEmpty())) {
+    		Alert alert= new Alert(AlertType.ERROR);
+    		alert.setHeaderText(null);
+    		alert.setContentText("Si prega di riempire tutti i campi richiesti");
+    		alert.showAndWait();
+    	}else {
+    		
+	        DaoUsername dao = new DaoUsername();
+	        List<User> user = dao.getUser();
+	        
+	        
+	        for(User u: user) {
+	        	
+	        	if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("1")) {
+	        		
+	        		m.changeScene("../gui/afterLoginAmm.fxml"); //scena amministratore
+	        		
+	        	}else if(checkSession()) {//controlla che la sessione sia aperta
+	
+	        		if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("0") && checkVoto(u.username)) { 
+		        		// elettore deve ancora votare
+		        		//imposto che ha votato
+		        		voto(username);
+		        		m.changeScene("../gui/afterLoginElettore.fxml"); //scena elettore
+	        		}else if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("0") && !checkVoto(u.username)) {
+		        		// elettore ha già votato
+		        		String messaggio = "L'utente ha già votato";
+		        		lblMessage.setText(messaggio);
+		        		lblMessage.setVisible(true);
+		        		break;
+	        		}else{
+		        		String messaggio = "Username o Password errati!";
+		        		lblMessage.setText(messaggio);
+		        		lblMessage.setVisible(true);
+	        		}
+	        	} else {
+	        		Alert alert= new Alert(AlertType.ERROR);
+	        		alert.setHeaderText(null);
+	        		alert.setContentText("La sessione di voto è chiusa");
+	        		alert.showAndWait();
+	        	}
+	        }
+    	}
 
     }
     //funzione che verifica lo stato della sessione
@@ -186,7 +196,6 @@ public class Controller implements UserDao{
     @FXML
     void initialize() {
         assert btnAcc != null : "fx:id=\"btnAcc\" was not injected: check your FXML file 'main.fxml'.";
-        assert btnReg != null : "fx:id=\"btnReg\" was not injected: check your FXML file 'main.fxml'.";
         assert lblMessage != null : "fx:id=\"lblMessage\" was not injected: check your FXML file 'main.fxml'.";
         assert lblPassword != null : "fx:id=\"lblPassword\" was not injected: check your FXML file 'main.fxml'.";
         assert lblUsername != null : "fx:id=\"lblUsername\" was not injected: check your FXML file 'main.fxml'.";
