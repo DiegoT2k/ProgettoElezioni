@@ -7,16 +7,21 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
+import model.User;
 
 public class VotazioneOrdController implements UserDao{
 	
@@ -120,14 +125,25 @@ public class VotazioneOrdController implements UserDao{
 
     @FXML
     void handleInvio(ActionEvent event) throws IOException {
-    	checkVoti();
-    	pressInvio();
-    }
+    	Alert alert= new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(null);
+		alert.setContentText("Desideri confermare l'invio del voto?");
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){			
+				alert= new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Voto Inviato");
+				alert.setContentText("Grazie e Buona giornata!");
+				alert.showAndWait();
+		    	checkVoti();
+		    	pressInvio();
+			}	
+		}
     
     private void pressInvio() throws IOException{  
     	Main m = new Main();
-    	m.changeScene("../gui/invioVoto.fxml");
-    }
+    	m.changeScene("../gui/main.fxml");
+	}
     
     private void checkVoti(){
     	voti[0]=spn1.getValue();

@@ -16,6 +16,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import model.User;
 
 public class ConteggioController implements UserDao{
 	
@@ -46,7 +47,7 @@ public class ConteggioController implements UserDao{
     	}else {
     		displayVinc(id, mod);
     	}
-        //cleanVote(mod);
+        cleanVote(mod);
     }
     
     private void displayRef(int vincitore) {
@@ -521,6 +522,15 @@ public class ConteggioController implements UserDao{
 	
 	//funzione che resetta tutti i voti
 	private void cleanVote(String mod) throws IOException{
+		//reset tabella user data
+		String sql4 = "update userdata set voto = 0 where voto != 0";
+		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+			PreparedStatement pr = conn.prepareStatement(sql4);
+				){
+			int r = pr.executeUpdate(sql4);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		if(mod.equals("Voto categorico")) {
 			//reset tabella votocategorico
 			String sql = "update votocategorico set nvoti = 0 where idvotato != 0";

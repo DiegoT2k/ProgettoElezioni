@@ -11,9 +11,12 @@ import java.util.ResourceBundle;
 import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
+import model.User;
 
 public class modVotoController implements UserDao{
 	String modvoto= "";
@@ -52,6 +55,12 @@ public class modVotoController implements UserDao{
 
     @FXML
     void handleOk(ActionEvent event) throws IOException {
+    	if (modvoto.equals("")) {
+        	Alert alert= new Alert(AlertType.ERROR);
+    		alert.setHeaderText(null);
+    		alert.setContentText("Si prega di selezionare una modalità di voto");
+    		alert.showAndWait();
+    	}
     	pressOk();
     }
     @FXML

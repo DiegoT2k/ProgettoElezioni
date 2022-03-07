@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
@@ -24,11 +25,6 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnInvio" mnemonicParsing="false" onAction="#handleInvio" prefHeight="39.0" prefWidth="85.0" text="Invio voto" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets left="70.0" />
-               </GridPane.margin>
-            </Button>
             <GridPane>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -44,16 +40,25 @@
                      <toggleGroup>
                         <ToggleGroup fx:id="voto" />
                      </toggleGroup>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="lblCand1" mnemonicParsing="false" onAction="#handleC1" toggleGroup="$voto" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="lblCand2" mnemonicParsing="false" onAction="#handleC2" toggleGroup="$voto" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="15.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </RadioButton>
                </children>
             </GridPane>
@@ -68,16 +73,25 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <RadioButton fx:id="lblPart2" mnemonicParsing="false" onAction="#handleP2" toggleGroup="$voto" GridPane.rowIndex="1" />
+                  <RadioButton fx:id="lblPart2" mnemonicParsing="false" onAction="#handleP2" toggleGroup="$voto" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font></RadioButton>
                   <RadioButton fx:id="lblCand3" mnemonicParsing="false" onAction="#handleC3" toggleGroup="$voto" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="lblCand4" mnemonicParsing="false" onAction="#handleC4" toggleGroup="$voto" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="15.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </RadioButton>
                </children>
             </GridPane>
@@ -92,16 +106,25 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <RadioButton fx:id="lblPart3" mnemonicParsing="false" onAction="#handleP3" toggleGroup="$voto" GridPane.rowIndex="1" />
+                  <RadioButton fx:id="lblPart3" mnemonicParsing="false" onAction="#handleP3" toggleGroup="$voto" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font></RadioButton>
                   <RadioButton fx:id="lblCand5" mnemonicParsing="false" onAction="#handleC5" toggleGroup="$voto" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="lblCand6" mnemonicParsing="false" onAction="#handleC6" toggleGroup="$voto" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="15.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </RadioButton>
                </children>
             </GridPane>
@@ -116,24 +139,42 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <RadioButton fx:id="lblPart4" mnemonicParsing="false" onAction="#handleP4" toggleGroup="$voto" GridPane.rowIndex="1" />
+                  <RadioButton fx:id="lblPart4" mnemonicParsing="false" onAction="#handleP4" toggleGroup="$voto" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font></RadioButton>
                   <RadioButton fx:id="lblCand7" mnemonicParsing="false" onAction="#handleC7" toggleGroup="$voto" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="lblCand8" mnemonicParsing="false" onAction="#handleC8" toggleGroup="$voto" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="15.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </RadioButton>
                </children>
             </GridPane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Button fx:id="btnInvio" layoutX="112.0" layoutY="36.0" mnemonicParsing="false" onAction="#handleInvio" prefHeight="39.0" text="Invio voto">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
          </children>
       </GridPane>
-      <Label layoutX="278.0" layoutY="27.0" text="Voto Categorico">
+      <Label layoutX="270.0" layoutY="22.0" text="Voto Categorico">
          <font>
-            <Font size="20.0" />
+            <Font size="24.0" />
          </font>
       </Label>
    </children>

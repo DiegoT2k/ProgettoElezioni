@@ -2,23 +2,27 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #f5cfa2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="237.0" layoutY="14.0" text="Fase di registrazione" textAlignment="JUSTIFY" textFill="RED">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="276.0" layoutY="14.0" text="Registrazione" textAlignment="JUSTIFY" textFill="RED">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <GridPane layoutX="89.0" layoutY="70.0" prefHeight="260.0" prefWidth="522.0">
+      <GridPane layoutY="60.0" prefHeight="250.0" prefWidth="700.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -30,107 +34,165 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnReg" mnemonicParsing="false" onAction="#handleReg" prefHeight="36.0" prefWidth="72.0" text="Registrati" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="200.0" text="Nome">
+                  <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="120.0" text="Nome" textAlignment="RIGHT">
                      <HBox.margin>
                         <Insets right="20.0" top="25.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Label>
-                  <TextField fx:id="lblNome" promptText="Nome..">
+                  <TextField fx:id="lblNome" prefHeight="30.0" promptText="Nome..">
                      <HBox.margin>
-                        <Insets top="20.0" />
+                        <Insets left="20.0" top="20.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </TextField>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Label prefWidth="200.0" text="Cognome">
+                  <Label alignment="CENTER_RIGHT" prefWidth="120.0" text="Cognome">
                      <HBox.margin>
-                        <Insets left="10.0" right="20.0" top="25.0" />
+                        <Insets right="20.0" top="25.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Label>
-                  <TextField fx:id="lblCognome" promptText="Cognome..">
+                  <TextField fx:id="lblCognome" prefHeight="30.0" promptText="Cognome..">
                      <HBox.margin>
-                        <Insets top="20.0" />
+                        <Insets left="20.0" top="20.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </TextField>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <Label prefWidth="200.0" text="Codice fiscale">
+                  <Label alignment="CENTER_RIGHT" prefWidth="120.0" text="Codice fiscale">
                      <HBox.margin>
                         <Insets right="20.0" top="25.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Label>
-                  <TextField fx:id="lblCodFiscale" alignment="CENTER" promptText="Codice fiscale..">
+                  <TextField fx:id="lblCodFiscale" prefHeight="30.0" promptText="Codice fiscale..">
                      <HBox.margin>
                         <Insets left="20.0" top="20.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </TextField>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label prefWidth="200.0" text="Data di nascita">
+                  <Label alignment="CENTER_RIGHT" prefWidth="120.0" text="Data di nascita">
                      <HBox.margin>
                         <Insets right="20.0" top="25.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Label>
-                  <TextField fx:id="lblDataNascita" accessibleRole="DATE_PICKER" alignment="CENTER" promptText="Data (aa-mm-gg)..">
+                  <DatePicker fx:id="lblDataNascita" prefHeight="30.0" promptText="Data (aa-mm-gg)..">
                      <HBox.margin>
-                        <Insets left="40.0" top="20.0" />
+                        <Insets left="20.0" top="20.0" />
                      </HBox.margin>
-                  </TextField>
+                  </DatePicker>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <Label prefWidth="200.0" text="Nazione di nascita">
+                  <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="120.0" text="Nazione di nascita">
                      <HBox.margin>
                         <Insets right="20.0" top="25.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Label>
-                  <TextField fx:id="lblNazioneNascita" alignment="CENTER" promptText="Nazione nascita..">
+                  <TextField fx:id="lblNazioneNascita" prefHeight="30.0" promptText="Nazione nascita..">
                      <HBox.margin>
-                        <Insets top="20.0" />
+                        <Insets left="20.0" top="20.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </TextField>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Label prefWidth="200.0" text="Comune di nascita">
+                  <Label alignment="CENTER_RIGHT" prefWidth="120.0" text="Comune di nascita">
                      <HBox.margin>
                         <Insets right="20.0" top="25.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Label>
-                  <TextField fx:id="lblComuneNascita" alignment="CENTER" promptText="Comune nascita..">
+                  <TextField fx:id="lblComuneNascita" prefHeight="30.0" promptText="Comune nascita..">
                      <HBox.margin>
-                        <Insets top="20.0" />
+                        <Insets left="20.0" top="20.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </TextField>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                <children>
-                  <Label prefWidth="200.0" text="Sesso">
+                  <Label alignment="CENTER_RIGHT" prefWidth="120.0" text="Sesso">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                      <HBox.margin>
                         <Insets right="20.0" top="25.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="lblSesso" alignment="CENTER" promptText="Sesso (m / f)..">
+                  <Pane prefHeight="62.0" prefWidth="173.0">
+                     <children>
+                        <RadioButton fx:id="lblUomo" layoutY="21.0" mnemonicParsing="false" text="Uomo">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="sesso" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="lblDonna" layoutX="93.0" layoutY="21.0" mnemonicParsing="false" text="Donna" toggleGroup="$sesso">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </RadioButton>
+                     </children>
                      <HBox.margin>
-                        <Insets top="20.0" />
+                        <Insets left="20.0" />
                      </HBox.margin>
-                  </TextField>
+                  </Pane>
                </children>
             </HBox>
          </children>
       </GridPane>
-      <Button fx:id="btnBack" layoutX="60.0" layoutY="328.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="36.0" prefWidth="72.0" text="Indietro" />
+      <Button fx:id="btnBack" layoutX="147.0" layoutY="340.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="36.0" prefWidth="100.0" text="Indietro">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="btnReg" layoutX="463.0" layoutY="340.0" mnemonicParsing="false" onAction="#handleReg" prefHeight="36.0" prefWidth="100.0" text="Registrati">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

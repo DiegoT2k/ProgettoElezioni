@@ -6,18 +6,23 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
+import model.User;
 
-public class ModCalcVotoController implements UserDao{
+public class modCalcVotoController implements UserDao{
 
-	String calc;
+	String calc="";
 	
     @FXML
     private ResourceBundle resources;
@@ -59,6 +64,12 @@ public class ModCalcVotoController implements UserDao{
 
     @FXML
     void handleOk(ActionEvent event) throws IOException {
+    	if (calc.equals("")) {
+        	Alert alert= new Alert(AlertType.ERROR);
+    		alert.setHeaderText(null);
+    		alert.setContentText("Si prega di selezionare una modalità di calcolo");
+    		alert.showAndWait();
+    	}
     	pressOk();
     }
 
@@ -74,10 +85,30 @@ public class ModCalcVotoController implements UserDao{
 		}
 		
 		if ((calc.equals("Maggioranza"))||(calc.equals("Maggioranza assoluta"))) {
-			Main m = new Main();
-			m.changeScene("../gui/open.fxml");
-		}
-    	
+	    	Alert alert= new Alert(AlertType.CONFIRMATION);
+			alert.setHeaderText(null);
+			alert.setContentText("Desideri confermare l'apertura della sessione di voto?");
+			
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK){
+				alert= new Alert(AlertType.INFORMATION);
+				alert.setHeaderText(null);
+				alert.setContentText("Sessione aperta");
+				alert.showAndWait();
+				//apri sessione, metti state = 1 = aperta
+				String sql2 = "update session set state = 1 where idsession = 1";
+				try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+					PreparedStatement pr = conn.prepareStatement(sql2);
+						){
+					int r = pr.executeUpdate(sql2);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				
+		    	Main m = new Main();
+		    	m.changeScene("../gui/afterLoginAmm.fxml");
+			}		
+		} 	
     }
     
     @FXML

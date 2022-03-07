@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import controllers.User;
+import model.User;
 
 public class DaoUsername implements UserDao{
 	

@@ -7,13 +7,18 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
+import model.User;
 
 public class AfterLoginControllerAmm implements UserDao{
 	
@@ -31,19 +36,24 @@ public class AfterLoginControllerAmm implements UserDao{
 
     @FXML
     private Button btnOpen;
-
-    @FXML
-    private Label lblError;
     
     @FXML
     void handleClose(ActionEvent event) throws IOException {
     	if(checkSessione()){
-    		closeSession();		
+    		Alert alert= new Alert(AlertType.CONFIRMATION);
+    		alert.setHeaderText(null);
+    		alert.setContentText("Desideri confermare la chiusura della sessione di voto?");
+    		
+    		Optional<ButtonType> result = alert.showAndWait();
+    		if (result.get() == ButtonType.OK){
+    			closeSession();	
+    		}	
     	}else if(!checkSessione()) {
     		//messaggio sessione già aperta
-    		String messaggio = "La sessione è già chiusa";
-    		lblError.setText(messaggio);
-    		lblError.setVisible(true);
+    		Alert alert= new Alert(AlertType.INFORMATION);
+    		alert.setHeaderText(null);
+    		alert.setContentText("La sessione è già chiusa");
+    		alert.showAndWait();
     	}
     }
     
@@ -53,15 +63,23 @@ public class AfterLoginControllerAmm implements UserDao{
     	    openSession();	
     	}else if(checkSessione()) {
     		//messaggio sessione già aperta
-    		String messaggio = "La sessione è già aperta";
-    		lblError.setText(messaggio);
-    		lblError.setVisible(true);
+    		Alert alert= new Alert(AlertType.INFORMATION);
+    		alert.setHeaderText(null);
+    		alert.setContentText("La sessione è già aperta");
+    		alert.showAndWait();
     	}
     }
     
     @FXML
     public void handleLogOut(ActionEvent event) throws IOException{
-    	checkLogOut();
+    	Alert alert= new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(null);
+		alert.setContentText("Desideri confermare il LogOut?");
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+			checkLogOut();
+		}
     }
 
     private void checkLogOut() throws IOException{
@@ -71,6 +89,7 @@ public class AfterLoginControllerAmm implements UserDao{
 
     private void closeSession() throws IOException{ 
 		//setta session.state = 0 = chiusa
+    	
 		String sql = "update session set state = 0 where idsession = 1";
 		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
 			PreparedStatement pr = conn.prepareStatement(sql);

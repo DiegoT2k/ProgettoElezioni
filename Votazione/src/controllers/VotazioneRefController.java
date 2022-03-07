@@ -7,13 +7,18 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
+import model.User;
 import dao.UserDao;
 
 public class VotazioneRefController implements UserDao{
@@ -61,7 +66,14 @@ public class VotazioneRefController implements UserDao{
 
     @FXML
     void handleVoto(ActionEvent event) throws IOException {
-    	pressInvio();
+    	Alert alert= new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(null);
+		alert.setContentText("Desideri confermare l'invio del voto?");
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){	
+			pressInvio();
+		}
     }
     
     private void pressInvio() throws IOException{
@@ -76,9 +88,17 @@ public class VotazioneRefController implements UserDao{
 	        		e.printStackTrace();
 	        	}
     		}
-    		
+    		Alert alert= new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Voto Inviato");
+			alert.setContentText("Grazie e Buona giornata!");
+			alert.showAndWait();
     		Main m = new Main();
-    		m.changeScene("../gui/invioVoto.fxml");
+    		m.changeScene("../gui/main.fxml");
+    	}else {
+    		Alert alert= new Alert(AlertType.ERROR);
+			alert.setHeaderText("Voto non selezionato");
+			alert.setContentText("Prego selezionare una delle 3 opzioni");
+			alert.showAndWait();
     	}
     }
 

@@ -7,14 +7,19 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
+import model.User;
 
 public class VotazioneCatController implements UserDao{
 	
@@ -217,22 +222,32 @@ public class VotazioneCatController implements UserDao{
 
     @FXML
     void handleInvio(ActionEvent event) throws IOException {
-    	//aggiungo voto candidati + conn db
-		String sql = "update votocategorico set nvoti = nvoti + 1 where idvotato = " + scelta;
-		try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
-			PreparedStatement pr = conn.prepareStatement(sql);
-				){
-			int r = pr.executeUpdate(sql);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
     	pressInvio();
     }
     
     private void pressInvio() throws IOException{
-    	Main m = new Main();
-    	m.changeScene("../gui/invioVoto.fxml");
+    	Alert alert= new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(null);
+		alert.setContentText("Desideri confermare l'invio del voto?");
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){	
+	    	//aggiungo voto candidati + conn db
+			String sql = "update votocategorico set nvoti = nvoti + 1 where idvotato = " + scelta;
+			try(Connection conn = DriverManager.getConnection(DBADDRESS, USER, PWD);
+				PreparedStatement pr = conn.prepareStatement(sql);
+					){
+				int r = pr.executeUpdate(sql);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			alert= new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Voto Inviato");
+			alert.setContentText("Grazie e Buona giornata!");
+			alert.showAndWait();
+		    Main m = new Main();
+		    m.changeScene("../gui/main.fxml");
+		}	
     }
     
     @FXML

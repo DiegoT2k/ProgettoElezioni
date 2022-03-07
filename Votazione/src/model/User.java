@@ -1,9 +1,9 @@
-package controllers;
+package model;
 
 public class User {
-	String username;
-	String password;
-	String amm;
+	public String username;
+	public String password;
+	public String amm;
 
 	
 	public User(String username, String password, String amm) {

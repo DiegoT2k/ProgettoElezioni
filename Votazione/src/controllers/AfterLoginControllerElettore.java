@@ -7,12 +7,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
+import model.User;
 
 public class AfterLoginControllerElettore implements UserDao{
 	
@@ -73,7 +78,14 @@ public class AfterLoginControllerElettore implements UserDao{
     
     @FXML
     public void handleLogOut(ActionEvent event) throws IOException{
-    	checkLogOut();
+    	Alert alert= new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(null);
+		alert.setContentText("Desideri confermare il LogOut?");
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+			checkLogOut();
+		}
     }
 
     private void checkLogOut() throws IOException{

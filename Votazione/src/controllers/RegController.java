@@ -11,12 +11,15 @@ import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import model.Elettore;
+import model.User;
 
 public class RegController implements UserDao{
-
-    @FXML
+	@FXML
     private ResourceBundle resources;
 
     @FXML
@@ -27,7 +30,7 @@ public class RegController implements UserDao{
 
     @FXML
     private Button btnReg;
-    
+
     @FXML
     private TextField lblCodFiscale;
 
@@ -38,7 +41,10 @@ public class RegController implements UserDao{
     private TextField lblComuneNascita;
 
     @FXML
-    private TextField lblDataNascita;
+    private DatePicker lblDataNascita;
+
+    @FXML
+    private RadioButton lblDonna;
 
     @FXML
     private TextField lblNazioneNascita;
@@ -47,7 +53,11 @@ public class RegController implements UserDao{
     private TextField lblNome;
 
     @FXML
-    private TextField lblSesso;
+    private RadioButton lblUomo;
+
+    @FXML
+    private ToggleGroup sesso;
+
 
     @FXML
     void handleBack(ActionEvent event) throws IOException {
@@ -58,10 +68,10 @@ public class RegController implements UserDao{
     @FXML
     void handleReg(ActionEvent event) throws IOException {
     	
-    	Elettore e = new Elettore(lblNome.getText(), lblCognome.getText(), lblCodFiscale.getText(), lblDataNascita.getText(), lblComuneNascita.getText(), lblNazioneNascita.getText(), lblSesso.getText());
+    	//Elettore e = new Elettore(lblNome.getText(), lblCognome.getText(), lblCodFiscale.getText(), lblDataNascita.getAccessibleText(), lblComuneNascita.getText(), lblNazioneNascita.getText(), lblSesso.getText());
     	
     	//se rispetta tutte le condizioni per la creazione dell'elettore
-    	charge(e);
+    	//charge(e);
     	
     	Main m = new Main();
     	m.changeScene("../gui/main.fxml");
@@ -90,7 +100,6 @@ public class RegController implements UserDao{
         assert lblDataNascita != null : "fx:id=\"lblDataNascita\" was not injected: check your FXML file 'registrazione.fxml'.";
         assert lblNazioneNascita != null : "fx:id=\"lblNazioneNascita\" was not injected: check your FXML file 'registrazione.fxml'.";
         assert lblNome != null : "fx:id=\"lblNome\" was not injected: check your FXML file 'registrazione.fxml'.";
-        assert lblSesso != null : "fx:id=\"lblSesso\" was not injected: check your FXML file 'registrazione.fxml'.";
 
     }
 

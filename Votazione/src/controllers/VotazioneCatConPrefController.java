@@ -7,14 +7,19 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
+import model.User;
 
 public class VotazioneCatConPrefController implements UserDao{
 	
@@ -136,8 +141,19 @@ public class VotazioneCatConPrefController implements UserDao{
 
     @FXML
     void handleInvio(ActionEvent event) throws IOException {
-    	checkVoto();
-    	pressInvio();
+    	Alert alert= new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(null);
+		alert.setContentText("Desideri confermare l'invio del voto?");
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){	
+			alert= new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Voto Inviato");
+			alert.setContentText("Grazie e Buona giornata!");
+			alert.showAndWait();
+			checkVoto();
+		    pressInvio();
+		}
     }
     
     //funzione che controlla non voto disgiunto
@@ -182,7 +198,7 @@ public class VotazioneCatConPrefController implements UserDao{
     
     private void pressInvio() throws IOException{
     	Main m = new Main();
-    	m.changeScene("../gui/invioVoto.fxml");
+    	m.changeScene("../gui/main.fxml");
     }
     
     private void riempiPart() throws IOException{

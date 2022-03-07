@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import model.User;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -35,9 +36,6 @@ public class Controller implements UserDao{
     private Button btnReg;
 
     @FXML
-    private Label lblMessage;
-
-    @FXML
     private PasswordField lblPassword;
 
     @FXML
@@ -45,19 +43,23 @@ public class Controller implements UserDao{
 
     @FXML
     private TextField lblUsername;
-    
+
     @FXML
-    void handlePassword(ActionEvent event) {
-    	
-    }
+    private TextField lblPwHidden;
     
     @FXML
     void handleCheck(ActionEvent event) {
-    }
-
-    @FXML
-    void handleUsername(ActionEvent event) {
-
+    	if(chckPw.isSelected()) {
+    		lblPwHidden.setText(lblPassword.getText());
+    		lblPwHidden.setDisable(false);
+    		lblPwHidden.setVisible(true);
+    		lblPassword.setVisible(false);
+    		lblPwHidden.setDisable(false);
+    		return;
+    	}
+    	lblPassword.setText(lblPwHidden.getText());
+    	lblPassword.setVisible(true);
+    	lblPwHidden.setVisible(false);
     }
 
     @FXML
@@ -72,18 +74,17 @@ public class Controller implements UserDao{
     }
     
 	private void checkLogin() throws IOException{
-    	
+		Alert alert= new Alert(AlertType.ERROR);
     	Main m = new Main();
     	String username = lblUsername.getText();
     	String pw = lblPassword.getText();
     	
     	if((username.isEmpty())||(pw.isEmpty())) {
-    		Alert alert= new Alert(AlertType.ERROR);
     		alert.setHeaderText(null);
     		alert.setContentText("Si prega di riempire tutti i campi richiesti");
     		alert.showAndWait();
     	}else {
-    		
+    		boolean a = true;
 	        DaoUsername dao = new DaoUsername();
 	        List<User> user = dao.getUser();
 	        
@@ -93,6 +94,8 @@ public class Controller implements UserDao{
 	        	if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("1")) {
 	        		
 	        		m.changeScene("../gui/afterLoginAmm.fxml"); //scena amministratore
+	        		a=false;
+	        		break;
 	        		
 	        	}else if(checkSession()) {//controlla che la sessione sia aperta
 	
@@ -101,23 +104,28 @@ public class Controller implements UserDao{
 		        		//imposto che ha votato
 		        		voto(username);
 		        		m.changeScene("../gui/afterLoginElettore.fxml"); //scena elettore
+		        		a=false;
+		        		break;
 	        		}else if(MD5(pw).equals(u.password) && username.equals(u.username) && u.amm.equals("0") && !checkVoto(u.username)) {
 		        		// elettore ha già votato
-		        		String messaggio = "L'utente ha già votato";
-		        		lblMessage.setText(messaggio);
-		        		lblMessage.setVisible(true);
+	        			alert.setHeaderText(null);
+		        		alert.setContentText("L'Utente ha già votato");
+		        		alert.showAndWait();
+		        		a=false;
 		        		break;
-	        		}else{
-		        		String messaggio = "Username o Password errati!";
-		        		lblMessage.setText(messaggio);
-		        		lblMessage.setVisible(true);
 	        		}
 	        	} else {
-	        		Alert alert= new Alert(AlertType.ERROR);
 	        		alert.setHeaderText(null);
 	        		alert.setContentText("La sessione di voto è chiusa");
 	        		alert.showAndWait();
+	        		a=false;
+	        		break;
 	        	}
+	        }
+	        if(a){
+	        	alert.setHeaderText(null);
+        		alert.setContentText("Username o Password errati!");
+        		alert.showAndWait();
 	        }
     	}
 
@@ -205,7 +213,6 @@ public class Controller implements UserDao{
     @FXML
     void initialize() {
         assert btnAcc != null : "fx:id=\"btnAcc\" was not injected: check your FXML file 'main.fxml'.";
-        assert lblMessage != null : "fx:id=\"lblMessage\" was not injected: check your FXML file 'main.fxml'.";
         assert lblPassword != null : "fx:id=\"lblPassword\" was not injected: check your FXML file 'main.fxml'.";
         assert lblUsername != null : "fx:id=\"lblUsername\" was not injected: check your FXML file 'main.fxml'.";
 
