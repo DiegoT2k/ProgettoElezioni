@@ -168,6 +168,15 @@ public class RegController implements UserDao{
 	    	
 	    	dialog.getDialogPane().setContent(grid);
 	    	
+	    	// Enable/Disable login button depending on whether a username was entered.
+	    	Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
+	    	loginButton.setDisable(true);
+
+	    	// Do some validation (using the Java 8 lambda syntax).
+	    	password.textProperty().addListener((observable, oldValue, newValue) -> {
+	    	    loginButton.setDisable(newValue.trim().isEmpty());
+	    	});
+	    	
 	    	// Convert the result to a username-password-pair when the login button is clicked.
 	    	dialog.setResultConverter(dialogButton -> {
 	    	    if (dialogButton == loginButtonType) {
@@ -178,7 +187,6 @@ public class RegController implements UserDao{
 	    	
 			Optional<Pair<String, String>> result = dialog.showAndWait();
 			if(result.isPresent()) {
-	    	if (!((password.getText().isBlank())||(confpassword.getText().isBlank()))){
 	    		if(confpassword.getText().equals(password.getText())) {   
 	    			String sql = "INSERT INTO `dbvotazione`.`userdata` (`nome`, `cognome`, `codfiscale`, `datan`, `comunen`, `nazionen`, `sesso`, `voto`) VALUES ( '" + e.nome + "' , '" + e.cognome + "' ,'" + e.codfiscale + "','" + e.datan + "', '" + e.comunen + "' , '" + e.nazionen + "' , '" + e.sesso + "' , " + e.voto+ ")";
 	    			
@@ -213,12 +221,12 @@ public class RegController implements UserDao{
 	        		alert.showAndWait();
 	    		}
 	    	} else {
+	    		a = false;
 	    		Alert alert= new Alert(AlertType.ERROR);
 	    		alert.setHeaderText("Registrazione incompleta");
 	    		alert.setContentText("Si prega di inserire una password!");
 	    		alert.showAndWait();
 	    	}
-    	}
     	}
     }
     
