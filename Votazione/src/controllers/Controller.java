@@ -20,6 +20,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 
 public class Controller implements UserDao{
 
@@ -212,9 +213,12 @@ public class Controller implements UserDao{
 
     @FXML
     void initialize() {
+    	lblUsername.setTextFormatter(new TextFormatter<>((change) -> {
+            change.setText(change.getText().toUpperCase());
+            return change;
+        }));
         assert btnAcc != null : "fx:id=\"btnAcc\" was not injected: check your FXML file 'main.fxml'.";
         assert lblPassword != null : "fx:id=\"lblPassword\" was not injected: check your FXML file 'main.fxml'.";
-        assert lblUsername != null : "fx:id=\"lblUsername\" was not injected: check your FXML file 'main.fxml'.";
 
     }
 
