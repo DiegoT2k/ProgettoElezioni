@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
+import model.Main;
 import model.User;
 
 public class modVotoController implements UserDao{

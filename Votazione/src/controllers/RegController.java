@@ -30,6 +30,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import javafx.scene.control.Alert.AlertType;
 import model.Elettore;
+import model.Main;
 import model.User;
 
 public class RegController implements UserDao{
