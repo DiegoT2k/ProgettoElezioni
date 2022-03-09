@@ -104,7 +104,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="lblDataNascita" prefHeight="30.0" promptText="Data (aa-mm-gg)..">
+                  <DatePicker fx:id="lblDataNascita" editable="false" prefHeight="30.0" promptText="Selezionare una data..">
                      <HBox.margin>
                         <Insets left="20.0" top="20.0" />
                      </HBox.margin>
