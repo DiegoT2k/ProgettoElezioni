@@ -25,6 +25,12 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getAmm() {
+		return amm;
+	}
+	public void setAmm(String amm) {
+		this.amm = amm;
+	}
 
 
 	@Override
